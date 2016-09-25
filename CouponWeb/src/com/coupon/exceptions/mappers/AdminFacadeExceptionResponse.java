@@ -12,6 +12,7 @@ public class AdminFacadeExceptionResponse implements ExceptionMapper<AdminFacade
 
 	@Override
 	public Response toResponse(AdminFacadeException e) {
+		e.printStackTrace();
 		ErrorMessage message = new ErrorMessage(e.getMessage(), ErrorCode.ADMIN_UNEXPECTED);
 		return Response.status(Status.INTERNAL_SERVER_ERROR).entity(message).build();
 	}
