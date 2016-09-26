@@ -12,7 +12,13 @@ public class ErrorCode {
 	public static final String CUSTOMER_DONT_EXISTS 		= "406-7";
 	public static final String COMPANY_COUPON_DONT_EXISTS 	= "406-8";
 	public static final String ID_MUST_B_NUM 				= "406-9";
+	public static final String COUPON_PURCHASED 			= "406-10";
+	public static final String OUT_OF_STOCK 				= "406-11";
+	public static final String OUT_OF_DATE	 				= "406-11";
+	
 	
 	// 500
 	public static final String ADMIN_UNEXPECTED 			= "500-1";
+	public static final String CUSTOMER_UNEXPECTED 			= "500-2";
+	
 }

@@ -28,6 +28,10 @@
 				com.coupon.exceptions.mappers.NumberFormatExceptionResponse;
 				com.coupon.exceptions.mappers.CustomerAlreadyExistsExceptionResponse;
 				com.coupon.exceptions.mappers.CustomerDoesNotExistExceptionResponse;
+				com.coupon.exceptions.mappers.CustomerFacadeExceptionResponse;
+				com.coupon.exceptions.mappers.CouponAlreadyPurchasedExceptionResponse;
+				com.coupon.exceptions.mappers.OutOfStockExceptionResponse;
+				com.coupon.exceptions.mappers.OutOfDateExceptionResponse;
 			</param-value>
 		</init-param>
 
