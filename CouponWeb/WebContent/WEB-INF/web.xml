@@ -25,7 +25,9 @@
 				com.coupon.exceptions.mappers.CouponDoesNotExistExceptionResponse; 
 				com.coupon.exceptions.mappers.CompanyDoesNotExistExceptionResponse; 
 				com.coupon.exceptions.mappers.CompanyCouponDoesNotExistsExceptionResponse;
-				com.coupon.exceptions.mappers.NumberFormatExceptionResponse
+				com.coupon.exceptions.mappers.NumberFormatExceptionResponse;
+				com.coupon.exceptions.mappers.CustomerAlreadyExistsExceptionResponse;
+				com.coupon.exceptions.mappers.CustomerDoesNotExistExceptionResponse;
 			</param-value>
 		</init-param>
 
