@@ -16,6 +16,7 @@ public class ErrorCode {
 	public static final String OUT_OF_STOCK 				= "406-11";
 	public static final String OUT_OF_DATE	 				= "406-11";
 	public static final String COUPON_TITLE_EXISTS	 		= "406-12";
+	public static final String ENUM_DOES_NOT_EXISTS	 		= "406-13";
 	
 	
 	
