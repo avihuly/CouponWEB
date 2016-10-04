@@ -4,8 +4,8 @@ import java.beans.PropertyVetoException;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
@@ -24,12 +24,11 @@ public class LoginServlet {
 	private HttpServletRequest request;
 
 	@GET
-	@Path("{name}/{password}/{clientType}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public int login(
-			@PathParam("name") String name, 
-			@PathParam("password") String password,
-			@PathParam("clientType") String clientTypeTxt) throws PropertyVetoException {
+	public boolean login(
+			@QueryParam("name") String name, 
+			@QueryParam("password") String password,
+			@QueryParam("clientType") String clientTypeTxt) throws PropertyVetoException {
 			
 		// Converting client type to enum
 		ClientType clientType = ClientType.valueOf(clientTypeTxt);
@@ -39,46 +38,39 @@ public class LoginServlet {
 			case Company:		return loginAsCompany(name, password);
 			case Customer:		return loginAsCustomer(name, password);
 		}
-		return Messages.FAILURE;
+		return false;
 	}
 
 	// ADMIN
-	private int loginAsAdmin(String name, String password) {
+	private boolean loginAsAdmin(String name, String password) {
 		AdminFacade adminFacade = CouponSystem.getInstance().loginAsAdmin(name, password);
 		if (adminFacade == null) {
-			return Messages.FAILURE;
+			return false;
 		} else {
 			request.getSession().setAttribute(Facade_Attr, adminFacade);
-			return Messages.SUCCESS;
+			return true;
 		}
 	}
 
 	// COMPANY
-	private int loginAsCompany(String name, String password) {
+	private boolean loginAsCompany(String name, String password) {
 		CompanyFacade compFacade = CouponSystem.getInstance().loginAsCompany(name, password);
 		if (compFacade == null) {
-			return Messages.FAILURE;
+			return false;
 		} else {
 			request.getSession().setAttribute(Facade_Attr, compFacade);
-			return Messages.SUCCESS;
+			return true;
 		}
 	}
 
 	// CUSTOMER
-	private int loginAsCustomer(String name, String password) {
+	private boolean loginAsCustomer(String name, String password) {
 		CustomerFacade custFacade = CouponSystem.getInstance().loginAsCustomer(name, password);
 		if (custFacade == null) {
-			return Messages.FAILURE;
+			return false;
 		} else {
 			request.getSession().setAttribute(Facade_Attr, custFacade);
-			return Messages.SUCCESS;
+			return true;
 		}
 	}
-
-//	 @GET
-//	 @Produces(MediaType.TEXT_XML)
-//	 public String login() {
-//	 return "<?xml version=\"1.0\"?> <login> LOGIN </login>";
-//	 }
-
 }
