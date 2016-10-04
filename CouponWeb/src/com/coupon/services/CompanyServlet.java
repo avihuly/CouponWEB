@@ -16,7 +16,7 @@ import com.couponproject.constants.CouponType;
 import com.couponproject.facade.CompanyFacade;
 
 
-@Path("/Company")
+@Path("/company")
 public class CompanyServlet {
 	
 	private static final String Facade_Attr = "FACADE";
@@ -86,7 +86,7 @@ public class CompanyServlet {
 	//getCouponByType
 	@POST
 	@Path("/getCouponByType")
-	@Consumes(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Coupon[] getCouponByType(String type) {
 		//getting the companyFacade saved in the session
@@ -116,6 +116,8 @@ public class CompanyServlet {
 	public Coupon[] getCouponByStartDate(String startDate) {
 		//getting the companyFacade saved in the session
 		CompanyFacade compFacade = (CompanyFacade) request.getSession().getAttribute(Facade_Attr);
+		System.out.println();
+		// Parsing LocalDate 
 		LocalDate startLocalDate = LocalDate.parse(startDate);
 		//the getCouponByStartDate function
 		return compFacade.getCouponByStartDate(startLocalDate).toArray(new Coupon[]{});

@@ -1,5 +1,7 @@
 package com.coupon.services;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -12,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import com.couponproject.beans.Coupon;
 import com.couponproject.constants.CouponType;
 import com.couponproject.facade.CustomerFacade;
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 @Path("/customer")
 public class CustomerServlet {
@@ -43,6 +46,26 @@ public class CustomerServlet {
 		// The getAllPurchasedCoupons function
 		return custFacade.getAllPurchasedCoupons().toArray(new Coupon[]{});
 	}
+	/////////////////////////////////////////
+	////////////////////////////////////////////
+	////////////////////////////////////
+//		@GET
+//		@Path("/purchasedCoupons")
+//		@Produces(MediaType.APPLICATION_JSON)
+//		public CouponType[] getAllPurchasedCoupons() {
+//			// getting the customerFacade saved in the session
+//			CustomerFacade custFacade = (CustomerFacade) request.getSession().getAttribute(Facade_Attr);
+//			// The getAllPurchasedCoupons function
+//			ArrayList<CouponType> types = new ArrayList<CouponType>();
+//			for(Coupon coupon :custFacade.getAllPurchasedCoupons()){
+//				types.add(coupon.getType());
+//			}
+//			System.out.println(types);
+//			return types.toArray(new CouponType[]{});
+//		}
+	//////////////////////////////////////
+	////////////////////////////////////
+	////////////////////////////////////
 
 	//Collection<Coupon> getAllPurchasedCouponsByType(CouponType type)
 	@POST
