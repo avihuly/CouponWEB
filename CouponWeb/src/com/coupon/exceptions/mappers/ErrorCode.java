@@ -15,10 +15,14 @@ public class ErrorCode {
 	public static final String COUPON_PURCHASED 			= "406-10";
 	public static final String OUT_OF_STOCK 				= "406-11";
 	public static final String OUT_OF_DATE	 				= "406-11";
+	public static final String COUPON_TITLE_EXISTS	 		= "406-12";
+	
 	
 	
 	// 500
 	public static final String ADMIN_UNEXPECTED 			= "500-1";
 	public static final String CUSTOMER_UNEXPECTED 			= "500-2";
+	public static final String COMPANY_UNEXPECTED 			= "500-3";
+	
 	
 }

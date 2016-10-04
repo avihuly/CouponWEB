@@ -1,6 +1,5 @@
 package com.coupon.services;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -9,6 +8,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+
 import com.couponproject.beans.Coupon;
 import com.couponproject.constants.CouponType;
 import com.couponproject.facade.CustomerFacade;
@@ -41,7 +41,7 @@ public class CustomerServlet {
 		// getting the customerFacade saved in the session
 		CustomerFacade custFacade = (CustomerFacade) request.getSession().getAttribute(Facade_Attr);
 		// The getAllPurchasedCoupons function
-		return custFacade.getAllPurchasedCoupons().toArray(new Coupon[] {});
+		return custFacade.getAllPurchasedCoupons().toArray(new Coupon[]{});
 	}
 
 	//Collection<Coupon> getAllPurchasedCouponsByType(CouponType type)
