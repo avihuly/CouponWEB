@@ -27,11 +27,13 @@ public class CompanyServlet {
 	@Path("/createCoupon")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public void createCoupon(Coupon coupon) {
+	public Coupon createCoupon(Coupon coupon) {	
 		//getting the companyFacade saved in the session
 		CompanyFacade compFacade = (CompanyFacade) request.getSession().getAttribute(Facade_Attr);
 		//the createCoupon function
 		compFacade.createCoupon(coupon);
+		// return coupon with updated id from DB
+		return coupon;
 	}
 	
 	//removeCoupon
@@ -39,13 +41,15 @@ public class CompanyServlet {
 	@Path("/removeCoupon")
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.APPLICATION_JSON)
-	public void removeCoupon(long id){
+	public Coupon removeCoupon(long id){
 		//getting the companyFacade saved in the session
 		CompanyFacade compFacade = (CompanyFacade) request.getSession().getAttribute(Facade_Attr);
-		// get coupon instace from db
+		// get coupon instance from DB
 		Coupon coupon = compFacade.getCoupon(id);
 		//the removeCoupon function
 		compFacade.removeCoupon(coupon);
+		// return the removed coupon
+		return coupon;
 	}
 	
 	//updateCoupon
@@ -53,11 +57,13 @@ public class CompanyServlet {
 	@Path("/updateCoupon")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public void updateCoupon(Coupon coupon){
+	public Coupon updateCoupon(Coupon coupon){
 		//getting the companyFacade saved in the session
 		CompanyFacade compFacade = (CompanyFacade) request.getSession().getAttribute(Facade_Attr);		
 		//the updateCoupon function
 		compFacade.updateCoupon(coupon);
+		// return updated coupon
+		return compFacade.getCoupon(coupon.getId());
 	}
 	
 	//getCoupon(long id)
@@ -116,7 +122,6 @@ public class CompanyServlet {
 	public Coupon[] getCouponByStartDate(String startDate) {
 		//getting the companyFacade saved in the session
 		CompanyFacade compFacade = (CompanyFacade) request.getSession().getAttribute(Facade_Attr);
-		System.out.println();
 		// Parsing LocalDate 
 		LocalDate startLocalDate = LocalDate.parse(startDate);
 		//the getCouponByStartDate function
@@ -124,13 +129,14 @@ public class CompanyServlet {
 	}
 	
 	//getCouponByEndDate
-	@GET
+	@POST
 	@Path("/getCouponByEndDate")
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Coupon[] getCouponByEndDate(String endDate) {
 		//getting the companyFacade saved in the session
 		CompanyFacade compFacade = (CompanyFacade) request.getSession().getAttribute(Facade_Attr);
+		// Parsing LocalDate
 		LocalDate endLocalDate = LocalDate.parse(endDate);
 		//the getCouponByStartDate function
 		return compFacade.getCouponByEndDate(endLocalDate).toArray(new Coupon[]{});

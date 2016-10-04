@@ -9,7 +9,6 @@ import javax.ws.rs.ext.Provider;
 public class NumberFormatExceptionResponse implements ExceptionMapper<NumberFormatException> {
 	@Override
 	public Response toResponse(NumberFormatException e) {
-		e.printStackTrace();
 		ErrorMessage message = new ErrorMessage("Value must be a number", ErrorCode.ID_MUST_B_NUM);
 		return Response.status(Status.BAD_REQUEST).entity(message).build();
 	}
