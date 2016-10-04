@@ -33,6 +33,7 @@
 				com.coupon.exceptions.mappers.OutOfStockExceptionResponse;
 				com.coupon.exceptions.mappers.OutOfDateExceptionResponse;
 				com.coupon.exceptions.mappers.CouponTitleAlreadyExistExceptionResponse;
+				com.coupon.exceptions.mappers.IllegalArgumentExceptionResponse;
 			</param-value>
 		</init-param>
 
