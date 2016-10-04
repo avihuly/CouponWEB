@@ -10,7 +10,7 @@ public class IllegalArgumentExceptionResponse implements ExceptionMapper<Illegal
 	@Override
 	public Response toResponse(IllegalArgumentException e) {
 		e.printStackTrace();
-		ErrorMessage message = new ErrorMessage("Value must be a number", ErrorCode.ENUM_DOES_NOT_EXISTS);
+		ErrorMessage message = new ErrorMessage("Enum Does Not Exists", ErrorCode.ENUM_DOES_NOT_EXISTS);
 		return Response.status(Status.BAD_REQUEST).entity(message).build();
 	}
 }
