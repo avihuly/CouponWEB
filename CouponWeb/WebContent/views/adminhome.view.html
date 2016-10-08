@@ -1,0 +1,32 @@
+<div class="container">
+
+    <div>
+        <div class="row">
+            <div class="col-12"> <h1> Coupon Web </h1> </div>
+            <div class="col-12"> <h6> {{clientType}} view </h6> </div>
+        </div>
+
+        <button type="button" class="btn btn-primary" ng-click="getAllCompanies()"> All Companies </button>
+
+        <br/>
+
+        <table>
+            <thead>
+                <tr>
+                    <th> ID </th>
+                    <th> Username </th>
+                    <th> Password </th>
+                    <th> Email </th>
+                </tr>
+            </thead>
+            <tr ng-repeat="company in companies">
+                <td><a href="#" editable-text="company.id"> {{company.id}}</a> </td>
+                <td><a href="#" editable-text="company.compName">  {{company.compName}}</td>
+                <td><a href="#" editable-text="company.password">  {{company.password}}</td>
+                <td><a href="#" editable-text="company.email">  {{company.email}}</td>
+            </tr>
+        </table>
+
+    </div>
+
+</div>

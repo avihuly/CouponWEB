@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>CouponWeb login</title>
+
+        <!--vendor.css-->
+        <link rel="stylesheet" href="vendor/bootstrap/bootstrap.css">
+
+        <!--app.css-->
+        <link rel="stylesheet" href="resources/css/login.css">
+        <link rel="stylesheet" href="vendor/xeditable/xeditable.css">
+
+
+    </head>
+    <body ng-app="Coupon">
+
+        <!--The main view of the app-->
+        <ng-view></ng-view>
+
+        <!--vendor.js-->
+        <script src="vendor/angular/angular.js"></script>
+        <script src="vendor/angular/angular-route.min.js"></script>
+        <script src="vendor/xeditable/xeditable.js"></script>
+
+        <!--app.js-->
+        <script src="main.js"></script>
+        <script src="controllers/login.controller.js"></script>
+        <script src="controllers/adminhome.controller.js"></script>
+    </body>
+</html>

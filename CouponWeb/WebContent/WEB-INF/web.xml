@@ -34,6 +34,8 @@
 				com.coupon.exceptions.mappers.OutOfDateExceptionResponse;
 				com.coupon.exceptions.mappers.CouponTitleAlreadyExistExceptionResponse;
 				com.coupon.exceptions.mappers.IllegalArgumentExceptionResponse;
+				
+				com.coupon.filters.CORSFIlter;
 			</param-value>
 		</init-param>
 

@@ -4,8 +4,8 @@ import java.beans.PropertyVetoException;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
@@ -24,12 +24,14 @@ public class LoginServlet {
 	private HttpServletRequest request;
 
 	@GET
+	@Path("{name}/{password}/{clientType}")	
 	@Produces(MediaType.TEXT_PLAIN)
 	public boolean login(
-			@QueryParam("name") String name, 
-			@QueryParam("password") String password,
-			@QueryParam("clientType") String clientTypeTxt) throws PropertyVetoException {
-			
+			@PathParam("name") String name, 
+			@PathParam("password") String password,
+			@PathParam("clientType") String clientTypeTxt) throws PropertyVetoException {
+		
+	
 		// Converting client type to enum
 		ClientType clientType = ClientType.valueOf(clientTypeTxt);
 		// Checking for

@@ -89,6 +89,7 @@ public class AdminServlet {
 		public Company[] getAllCompanies() {
 		//getting the adminFacade saved in the session
 		AdminFacade adminFacade = (AdminFacade) request.getSession().getAttribute(Facade_Attr);
+		
 		// get companies from DB
 		return adminFacade.getAllCompanies().toArray(new Company[]{});
 		}
