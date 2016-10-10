@@ -51,7 +51,7 @@ public class AdminServlet {
 			Company company = adminFacade.getCompany(id);
 			// Remove company from DB
 			adminFacade.removeCompany(company);
-			// After DB deletion return the company instance  
+			// After DB deletion return the company instance
 			return company;
 		}
 
