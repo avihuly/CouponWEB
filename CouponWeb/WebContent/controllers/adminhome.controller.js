@@ -2,7 +2,7 @@
  * Created by Avi on 07/10/2016.
  */
 angular.module("Coupon")
-    .controller("adminhomeController", function ($scope, $http, $rootScope) {
+    .controller("adminhomeController", function ($scope, $http, $rootScope, couponUtil) {
         $scope.serverURL = "http://localhost:8080/CouponWeb/coupon/admin";
         $scope.clientType = $rootScope.clientType;
 
@@ -70,8 +70,6 @@ angular.module("Coupon")
                     },
                     function errorCallback(response) {
                         logResponse('ERROR:', response);
-                        // $scope.companyform = $scope.companies[index];
-                        // TODO
                     });
             } else {
                 // Update company in DB
@@ -90,20 +88,15 @@ angular.module("Coupon")
                     },
                     function errorCallback(response) {
                         logResponse('ERROR:', response);
-                        // $scope.companyform = $scope.companies[index];
-                        // TODO
                     });
             }
         }
+
+
+        $scope.onberofesavePASSWORD = function (data) {
+            return couponUtil.passwordValidation(data);
+        }
+
+
+
     });
-
-
-//
-
-
-// transfer to main.sj
-function logResponse(message, response) {
-    console.log(message);
-    console.log(response.data);
-}
-
