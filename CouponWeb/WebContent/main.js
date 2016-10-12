@@ -15,9 +15,11 @@ app.config(function ($routeProvider) {
 
 
 // this method will be acscuted after components (Ctrl) are loaded
-app.run(function (editableOptions) {
+app.run(function (editableOptions, editableThemes) {
     console.log("run web app");
     editableOptions.theme = 'bs3';
+    editableThemes.bs3.fromTpl = '<form class="editable-wrap" role="form" ng-class="xformClass"</form>';
+    editableThemes.bs3.controlsTpl = '<div class="editable-controls form-group row" ng-class="{\'has-error\': $error}"></div>';
 });
 
 ///////////////////

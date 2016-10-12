@@ -6,6 +6,8 @@ angular.module("Coupon")
         $scope.serverURL = "http://localhost:8080/CouponWeb/coupon/admin";
         $scope.clientType = $rootScope.clientType;
 
+        $scope.xformClass = "col-md-9";
+
         // Companies model array
         $scope.companies = [];
 
