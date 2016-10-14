@@ -18,31 +18,11 @@ app.config(function ($routeProvider) {
 app.run(function (editableOptions, editableThemes) {
     console.log("run web app");
     editableOptions.theme = 'bs3';
-    editableThemes.bs3.fromTpl = '<form class="editable-wrap" role="form" ng-class="xformClass"</form>';
-    editableThemes.bs3.controlsTpl = '<div class="editable-controls form-group row" ng-class="{\'has-error\': $error}"></div>';
-});
-
-///////////////////
-// Util services //
-///////////////////
-app.service('couponUtil', function () {
-    // password validation
-    this.passwordValidation = function (password) {
-        var pattern = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,10}/g;
-        if (pattern.test(password) && (password.length < 10)){
-            return true;
-        } else {
-            return "Password must contain:\n"
-            + "6-10 characters\n"
-            + "At lest one upper case letter\n"
-            + "At lest one lower case letter\n"
-            + "At lest one digit";
-        }
-    }
 });
 
 
 // Util methods
+// TODO: move to a new logservice
 function logResponse(message, response) {
     console.log(message);
     console.log(response.data);
