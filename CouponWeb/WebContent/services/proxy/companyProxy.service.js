@@ -8,9 +8,6 @@ angular.module("Coupon")
         }
 
         this.create = function (company) {
-            var companyToCreate = angular.copy(company);
-            companyToCreate.id = null; // NOTE: backend needs id as part of
-
             return $http({
                 method: 'POST',
                 url: baseUrl + "/createCompany",
@@ -18,6 +15,7 @@ angular.module("Coupon")
                 data: company
             })
         }
+
         this.update = function (id, company) {
             var companyToUpdate = angular.copy(company);
             companyToUpdate.id = id;
@@ -39,8 +37,13 @@ angular.module("Coupon")
             })
         }
 
+        // not in use
         this.getByid = function (id) {
-
+            return $http({
+                method: 'POST',
+                url: baseUrl + "/getCompany",
+                headers: {'Content-Type': 'application/json'},
+                data: id
+            })
         }
-
     });

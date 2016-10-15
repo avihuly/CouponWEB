@@ -7,10 +7,7 @@ form {
     align-self: center ;
 }
 
-table {
+table, td, tr {
     margin: 0 auto;
-}
-
-a {
-
+    text-align: left;
 }

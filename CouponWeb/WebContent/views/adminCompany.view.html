@@ -1,19 +1,21 @@
 <div>
     <table class="table table-responsive table-hover table-condensed">
-        <thead align="center">
+        <thead>
         <tr style="font-weight: bold">
             <th style="width:30%"> Username</th>
             <th style="width:30%"> Password</th>
             <th style="width:40%"> Email</th>
         </tr>
         </thead>
-        <tr ng-repeat="company in companies">
+        <!--each table row represent a compny-->
+        <tr ng-repeat="company in companies | filter:searchText">
             <td>
                 <!--company name-->
                 <span editable-text="company.compName"
                       e-name="compName"
                       e-form="companyform"
-                      e-placeholder="company name">
+                      e-placeholder="company name"
+                      onbeforesave="onberofesaveCompanyName($data)">
                             {{company.compName}}
                         </span>
             </td>
@@ -37,9 +39,8 @@
                             {{company.email}}
                         </span>
             </td>
-            <!---->
             <td style="white-space: nowrap">
-                <!-- form -->
+                <!-- form - edit buttons  -->
                 <form editable-form name="companyform"
                       onbeforesave="addUpdateCompany($data, $index)"
                       ng-show="companyform.$visible"

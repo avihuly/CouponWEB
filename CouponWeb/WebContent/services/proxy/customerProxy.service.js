@@ -1,23 +1,48 @@
 angular.module("Coupon")
     .service('customerProxy', function ($http) {
+            var baseUrl = "coupon/admin";
 
-        this.getAll = function () {
+            this.getAll = function () {
+                    return $http.get(baseUrl + "/getAllCustomers");
+            }
 
-        }
+            this.create = function (customer) {
+                    return $http({
+                            method: 'POST',
+                            url: baseUrl + "/createCustomer",
+                            headers: {'Content-Type': 'application/json'},
+                            data: customer
+                    })
+            }
 
-        this.create = function () {
+            this.update = function (id, customer) {
+                    var customerToUpdate = angular.copy(customer);
+                    customerToUpdate.id = id;
 
-        }
-        this.update = function () {
+                    return $http({
+                            method: 'POST',
+                            url: baseUrl + "/updateCustomer",
+                            headers: {'Content-Type': 'application/json'},
+                            data: customerToUpdate
+                    })
+            }
 
-        }
+            this.remove = function (id) {
+                    return $http({
+                            method: 'Delete',
+                            url: baseUrl + "/removeCustomer",
+                            headers: {'Content-Type': 'text/plain'},
+                            data: id
+                    })
+            }
 
-        this.remove = function () {
-
-        }
-
-        this.getByid = function () {
-
-        }
-
+            // not in use
+            this.getByid = function (id) {
+                    return $http({
+                            method: 'POST',
+                            url: baseUrl + "/getCustomer",
+                            headers: {'Content-Type': 'application/json'},
+                            data: id
+                    })
+            }
     });
