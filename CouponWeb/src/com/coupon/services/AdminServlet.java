@@ -10,8 +10,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import com.couponproject.beans.Company;
+import com.couponproject.beans.Coupon;
 import com.couponproject.beans.Customer;
+import com.couponproject.exception.CouponSystemException;
 import com.couponproject.facade.AdminFacade;
+import com.couponproject.system.CouponSystem;
 
 @Path("/admin")
 public class AdminServlet {
@@ -24,8 +27,8 @@ public class AdminServlet {
 	//////////////////// *************** /////////////////
 	//////////////////// COMPANY METHODS /////////////////
 	//////////////////// *************** /////////////////
-	
-	//Create company
+		
+		//Create company
 		@POST
 		@Path("/createCompany")
 		@Consumes(MediaType.APPLICATION_JSON)
@@ -64,7 +67,6 @@ public class AdminServlet {
 			//getting the adminFacade saved in the session
 			AdminFacade adminFacade = (AdminFacade) request.getSession().getAttribute(Facade_Attr);
 			// Up dating company 
-			System.out.println(company);
 			adminFacade.updateCompany(company);
 			// return updated company
 			return adminFacade.getCompany(company.getId());
@@ -89,9 +91,17 @@ public class AdminServlet {
 		public Company[] getAllCompanies() {
 		//getting the adminFacade saved in the session
 		AdminFacade adminFacade = (AdminFacade) request.getSession().getAttribute(Facade_Attr);
-		
 		// get companies from DB
 		return adminFacade.getAllCompanies().toArray(new Company[]{});
+		}
+		
+		// /getCompanyCoupons
+		@POST
+		@Path("/getCompanyCoupons")
+		@Consumes(MediaType.TEXT_PLAIN)
+		@Produces(MediaType.APPLICATION_JSON)
+		public Coupon[] getCompanyCoupons(long id) throws CouponSystemException { //Implement in ADMIN FACADE and deal with Exception
+			return CouponSystem.getInstance().getCompanyDBDAO().getCoupons(id).toArray(new Coupon[]{});
 		}
 		
 		//////////////////// **************** /////////////////
@@ -164,4 +174,13 @@ public class AdminServlet {
 			//the getAllCustomers function
 			return adminFacade.getAllCustomers().toArray(new Customer[]{});	
 		}
+		
+		//getCustomerCoupons
+		@POST
+		@Path("/getCustomerCoupons")
+		@Consumes(MediaType.TEXT_PLAIN)
+		@Produces(MediaType.APPLICATION_JSON)
+		public Coupon[] getCustomerCoupons(long id) throws CouponSystemException { // Implement in ADMIN FACADE and deal with Exception													
+			return CouponSystem.getInstance().getCustomerDBDAO().getCoupons(id).toArray(new Coupon[] {});
+	}
 }

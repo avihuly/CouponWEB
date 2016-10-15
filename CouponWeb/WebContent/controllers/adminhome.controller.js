@@ -44,10 +44,9 @@ angular.module("Coupon")
         }
 
 
-
-                    /////////////
-                    // COMPANY //
-                    /////////////
+        /////////////
+        // COMPANY //
+        /////////////
         // Get all companies
         $scope.getAllCompanies = function () {
             companyProxy.getAll()
@@ -62,7 +61,7 @@ angular.module("Coupon")
 
         // Remove company
         $scope.removeCompany = function (index) {
-            companyProxy.remove($scope.companies[index])
+            companyProxy.remove($scope.companies[index].id)
                 .then(
                     function successCallback(response) {
                         console.log('DELETED:');
@@ -79,15 +78,16 @@ angular.module("Coupon")
         $scope.addUpdateCompany = function (data, index) {
             if ($scope.companies[index].id == null) {
                 // Add new company to db
-                companyProxy.create(data).then(
-                    function successCallback(response) {
-                        logResponse('New company added to DB:', response);
-                        // update model
-                        $scope.companies[index] = response.data;
-                    },
-                    function errorCallback(response) {
-                        logResponse('ERROR:', response);
-                    });
+                companyProxy.create(data)
+                    .then(
+                        function successCallback(response) {
+                            logResponse('New company added to DB:', response);
+                            // update model
+                            $scope.companies[index] = response.data;
+                        },
+                        function errorCallback(response) {
+                            logResponse('ERROR:', response);
+                        });
             } else {
                 // Update company in DB
                 companyProxy.update($scope.companies[index].id, data).then(
@@ -107,9 +107,29 @@ angular.module("Coupon")
             $scope.companies.push(companyFactory());
         };
 
-                    //////////////
-                    // CUSTOMER //
-                    //////////////
+        // Get all company coupons
+        $scope.getCompanyCoupons = function (id, index) {
+            companyProxy.getCoupons(id)
+                .then(
+                    function successCallback(response) {
+                        console.debug('COUPONS:',response.data);
+
+                        for (var i=0; i < response.data.length ; i++) {
+                            console.debug(response.data[i]);
+                        }
+
+
+                        $scope.companies[index].coupons = response.data;
+                    },
+                    function errorCallback(response) {
+                        logResponse('ERROR:', response);
+                    });
+        }
+
+
+        //////////////
+        // CUSTOMER //
+        //////////////
         // Get all customers
         $scope.getAllCustomers = function () {
             customerProxy.getAll()
@@ -124,7 +144,8 @@ angular.module("Coupon")
 
         // Remove customer
         $scope.removeCustomer = function (index) {
-            customerProxy.remove($scope.customers[index])
+            console.log(index);
+            customerProxy.remove($scope.customers[index].id)
                 .then(
                     function successCallback(response) {
                         console.log('DELETED:');
@@ -168,4 +189,17 @@ angular.module("Coupon")
         $scope.addRowForCompany = function () {
             $scope.companies.push(customerFactory());
         };
+
+        // Get all customer coupons
+        $scope.getCustomerCoupons = function (id) {
+            customerProxy.getCoupons(id)
+                .then(
+                    function successCallback(response) {
+                        console.debug('customer COUPONS:',response.data);
+                        $scope.customers[index].coupons = response.data;
+                    },
+                    function errorCallback(response) {
+                        logResponse('ERROR:', response);
+                    });
+        }
     });

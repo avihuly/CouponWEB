@@ -8,7 +8,8 @@
         </tr>
         </thead>
         <!--each table row represent a compny-->
-        <tr ng-repeat="company in companies | filter:searchText">
+        <tr ng-repeat="company in companies | filter:searchText"
+            ng-click="getCompanyCoupons(company.id, $index)">
             <td>
                 <!--company name-->
                 <span editable-text="company.compName"

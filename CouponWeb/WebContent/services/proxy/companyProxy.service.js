@@ -25,7 +25,7 @@ angular.module("Coupon")
                 url: baseUrl + "/updateCompany",
                 headers: {'Content-Type': 'application/json'},
                 data: companyToUpdate
-            })
+            });
         }
 
         this.remove = function (id) {
@@ -34,9 +34,18 @@ angular.module("Coupon")
                 url: baseUrl + "/removeCompany",
                 headers: {'Content-Type': 'text/plain'},
                 data: id
-            })
+            });
         }
 
+        this.getCoupons = function (id) {
+            return $http({
+                method: 'POST',
+                url: baseUrl + "/getCompanyCoupons",
+                headers: {'Content-Type': 'text/plain'},
+                data: id
+            });
+        }
+        
         // not in use
         this.getByid = function (id) {
             return $http({
