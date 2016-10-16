@@ -1,6 +1,6 @@
 angular.module("Coupon")
     .controller("adminhomeController", function
-        ($scope, $http, $rootScope, couponUtil,
+        ($scope, $http, $rootScope, $location, couponUtil,
          loginProxy, companyProxy, customerProxy,
          companyFactory, customerFactory) {
 
@@ -22,20 +22,20 @@ angular.module("Coupon")
 
         // company validation method
         $scope.onberofesaveCompanyName = function (data) {
-            var compNames = [];
+            var names = [];
             for (var i = 0; i < $scope.companies.length; i++) {
-                compNames.push($scope.companies[i].compName);
+                names.push($scope.companies[i].name);
             }
-            return couponUtil.usernameValidation(data, compNames);
+            return couponUtil.usernameValidation(data, names);
         }
 
         // customer validation method
         $scope.onberofesaveCustomerName = function (data) {
-            var custNames = [];
+            var names = [];
             for (var i = 0; i < $scope.customers.length; i++) {
-                custNames.push($scope.customers[i].custName);
+                names.push($scope.customers[i].name);
             }
-            return couponUtil.usernameValidation(data, custNames);
+            return couponUtil.usernameValidation(data, names);
         }
 
         // Clear Search Text
@@ -112,14 +112,9 @@ angular.module("Coupon")
             companyProxy.getCoupons(id)
                 .then(
                     function successCallback(response) {
-                        console.debug('COUPONS:',response.data);
-
-                        for (var i=0; i < response.data.length ; i++) {
-                            console.debug(response.data[i]);
-                        }
-
-
                         $scope.companies[index].coupons = response.data;
+                        $scope.focusOn = $scope.companies[index];
+                        $scope.sideBarRadioClickModel =  "views/coupons.view.html"
                     },
                     function errorCallback(response) {
                         logResponse('ERROR:', response);
@@ -192,16 +187,15 @@ angular.module("Coupon")
 
         // Get all customer coupons
         $scope.getCustomerCoupons = function (id, index) {
+
             console.debug(id, index);
             customerProxy.getCoupons(id)
                 .then(
                     function successCallback(response) {
-                        console.debug('customer COUPONS:',response.data);
                         $scope.customers[index].coupons = response.data;
+                        $scope.focusOn = $scope.customers[index];
+                        $scope.sideBarRadioClickModel =  "views/coupons.view.html"
 
-                        for (var i=0; i < response.data.length ; i++) {
-                            console.debug(response.data[i]);
-                        }
 
                     },
                     function errorCallback(response) {

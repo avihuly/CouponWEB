@@ -12,12 +12,12 @@
             ng-click="getCompanyCoupons(company.id, $index)">
             <td>
                 <!--company name-->
-                <span editable-text="company.compName"
-                      e-name="compName"
+                <span editable-text="company.name"
+                      e-name="name"
                       e-form="companyform"
                       e-placeholder="company name"
                       onbeforesave="onberofesaveCompanyName($data)">
-                            {{company.compName}}
+                            {{company.name}}
                         </span>
             </td>
             <td>

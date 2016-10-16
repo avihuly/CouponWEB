@@ -16,7 +16,7 @@ app.config(function ($routeProvider) {
 
 
 // this method will be acscuted after components (Ctrl) are loaded
-app.run(function (editableOptions, editableThemes) {
+app.run(function (editableOptions) {
     console.log("run web app");
     editableOptions.theme = 'bs3';
 });
