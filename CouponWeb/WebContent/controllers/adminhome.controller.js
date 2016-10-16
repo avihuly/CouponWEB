@@ -191,12 +191,18 @@ angular.module("Coupon")
         };
 
         // Get all customer coupons
-        $scope.getCustomerCoupons = function (id) {
+        $scope.getCustomerCoupons = function (id, index) {
+            console.debug(id, index);
             customerProxy.getCoupons(id)
                 .then(
                     function successCallback(response) {
                         console.debug('customer COUPONS:',response.data);
                         $scope.customers[index].coupons = response.data;
+
+                        for (var i=0; i < response.data.length ; i++) {
+                            console.debug(response.data[i]);
+                        }
+
                     },
                     function errorCallback(response) {
                         logResponse('ERROR:', response);

@@ -37,7 +37,7 @@ angular.module("Coupon")
             });
         }
 
-        this.getCouponsByID = function (id) {
+        this.getCouponByID = function (id) {
             return $http({
                 method: 'POST',
                 url: baseUrl + "/getCoupon",
