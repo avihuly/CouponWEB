@@ -10,6 +10,7 @@
         <tr ng-repeat="customer in customers | filter:searchText"
             ng-click="getCompanyCoupons(comapny.id)">
             <td>
+            <!-- row 10-11 shold be customer?? -->
                 <!--customer name-->
                 <span editable-text="customer.custName"
                       e-name="custName"

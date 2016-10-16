@@ -11,6 +11,7 @@ app.config(function ($routeProvider) {
         .when("/", {redirectTo:"/login"})
         .when("/login", {controller: "loginController", templateUrl:"views/login.view.html"})
         .when("/adminhome", {controller: "adminhomeController", templateUrl:"views/adminhome.view.html"})
+        .when("/companyhome", {controller: "companyController", templateUrl:"views/companyhome.view.html"})
 });
 
 
