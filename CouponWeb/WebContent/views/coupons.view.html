@@ -1,7 +1,29 @@
-<div>
-    Coupons View
+<div class="container-fluid">
     <br/>
-    {{focusOn.id+", " + focusOn.name}}
+    <h2>{{focusOn.id+", " + focusOn.name}} - Coupons </h2>
     <br/>
-    {{focusOn.coupons}}
+    <div class="row">
+        <div class="col-sm-6 col-md-4" ng-repeat="coupon in focusOn.coupons">
+            <div class="thumbnail">
+                <h3> {{coupon.title}} </h3>
+
+                <img ng-src={{coupon.image}}
+                     alt={{coupon.title}}
+                     class="img-responsive"
+                     height="{{ couponPicSize.height }}"
+                     width="{{ couponPicSize.width }}">
+
+                    <span class="label label-info info" id="topInfo">
+                            <span data-toggle="tooltip" title="" data-original-title="viewed">257
+                                <b class="glyphicon glyphicon-eye-open"></b></span>
+                    </span>
+                    <span class="label label-danger info" id="bottomInfo">
+                            <span data-toggle="tooltip" title="" data-original-title="viewed">30000
+                                <b class="glyphicon glyphicon-eye-open"></b></span>
+                    </span>
+                <img/>
+            </div>
+            <br/>
+        </div>
+    </div>
 </div>

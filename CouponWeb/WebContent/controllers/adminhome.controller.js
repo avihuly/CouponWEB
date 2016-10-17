@@ -8,6 +8,8 @@ angular.module("Coupon")
         $scope.companies = [];
         // customer model array
         $scope.customers = [];
+        // coupon image size
+        $scope.couponPicSize = {width: "200px", height: "75px"};
         // Search text
         $scope.searchText = '';
         // client Type
@@ -187,16 +189,12 @@ angular.module("Coupon")
 
         // Get all customer coupons
         $scope.getCustomerCoupons = function (id, index) {
-
-            console.debug(id, index);
             customerProxy.getCoupons(id)
                 .then(
                     function successCallback(response) {
                         $scope.customers[index].coupons = response.data;
                         $scope.focusOn = $scope.customers[index];
                         $scope.sideBarRadioClickModel =  "views/coupons.view.html"
-
-
                     },
                     function errorCallback(response) {
                         logResponse('ERROR:', response);
