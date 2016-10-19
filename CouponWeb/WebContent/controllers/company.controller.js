@@ -40,7 +40,8 @@ angular.module("Coupon")
         	companyCouponProxy.getAll()
                 .then(
                     function successCallback(response) {
-                        $scope.coupons = response.data;
+                       console.debug(response.data);
+                    	$scope.coupons = response.data;
                     },
                     function errorCallback(response) {
                         logResponse('ERROR:', response);
