@@ -104,11 +104,6 @@ angular.module("Coupon")
             }
         }
 
-        // Add ROW for new company
-        $scope.addRowForCompany = function () {
-            $scope.companies.push(companyFactory());
-        };
-
         // Get all company coupons
         $scope.getCompanyCoupons = function (id, index) {
             companyProxy.getCoupons(id)
@@ -122,6 +117,11 @@ angular.module("Coupon")
                         logResponse('ERROR:', response);
                     });
         }
+
+        // Add ROW for new company
+        $scope.addRowForCompany = function () {
+            $scope.companies.push(companyFactory());
+        };
 
 
         //////////////
@@ -182,11 +182,6 @@ angular.module("Coupon")
             }
         }
 
-        // Add ROW for new company
-        $scope.addRowForCompany = function () {
-            $scope.companies.push(customerFactory());
-        };
-
         // Get all customer coupons
         $scope.getCustomerCoupons = function (id, index) {
             customerProxy.getCoupons(id)
@@ -200,4 +195,9 @@ angular.module("Coupon")
                         logResponse('ERROR:', response);
                     });
         }
+
+        // Add ROW for new company
+        $scope.addRowForCustomer = function () {
+            $scope.customers.push(customerFactory());
+        };
     });

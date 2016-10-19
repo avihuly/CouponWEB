@@ -7,9 +7,8 @@
         </tr>
         </thead>
         <!--each table row represent a compny-->
-        <tr ng-repeat="customer in customers | filter:searchText"
-            ng-click="getCustomerCoupons(customer.id, $index)">
-            <td>
+        <tr ng-repeat="customer in customers | filter:searchText">
+            <td ng-click="getCustomerCoupons(customer.id, $index)">
             <!-- row 10-11 shold be customer?? -->
                 <!--customer name-->
                 <span editable-text="customer.name"
@@ -20,7 +19,7 @@
                             {{customer.name}}
                         </span>
             </td>
-            <td>
+            <td ng-click="getCustomerCoupons(customer.id, $index)">
                 <!--Password-->
                 <span editable-text="customer.password"
                       e-name="password"
@@ -53,5 +52,5 @@
         </tr>
     </table>
     </br>
-    <button class="btn btn-default" ng-click="addRowForcustomer()">Add row</button>
+    <button class="btn btn-default" ng-click="addRowForCustomer()">Add row</button>
 </div>
