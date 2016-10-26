@@ -38,7 +38,6 @@
 				com.coupon.filters.CORSFIlter;
 			</param-value>
 		</init-param>
-
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 
@@ -48,7 +47,19 @@
 		<url-pattern>/coupon/*</url-pattern>
 	</servlet-mapping>
 
-
+	<filter> 
+      	<filter-name>loginFilter</filter-name> 
+      	<filter-class>com.coupon.filters.LoginFilter</filter-class> 
+   </filter> 
+   <filter-mapping> 
+    	<filter-name>loginFilter</filter-name>
+    	<url-pattern>/coupon/admin/*</url-pattern> 
+    	<url-pattern>/coupon/admin</url-pattern>
+    	<url-pattern>/coupon/company/*</url-pattern>
+    	<url-pattern>/coupon/company</url-pattern>
+    	<url-pattern>/coupon/customer/*</url-pattern>
+    	<url-pattern>/coupon/customer</url-pattern>
+	</filter-mapping>
 
 
 

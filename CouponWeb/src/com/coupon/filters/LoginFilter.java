@@ -3,26 +3,39 @@ package com.coupon.filters;
 import java.io.IOException;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
+@WebFilter("/loginFilter")
 public class LoginFilter implements Filter {
 
 	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2)
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		
+
+		HttpServletRequest httpRequest = (HttpServletRequest) request;
+
+		System.out.println("IN FILTER");
+		System.out.println(httpRequest.getSession(false));
+
+		if (httpRequest.getSession(false) == null) {
+			System.out.println("B4 redirect");
+			// TODO:
+			System.out.println("After redirect");
+		} else {
+			chain.doFilter(request, response);
+		}
+
 	}
 
 	@Override
-	public void init(FilterConfig arg0) throws ServletException {
-		// TODO Auto-generated method stub
-		
+	public void init(FilterConfig config) throws ServletException {
 	}
 
+	@Override
+	public void destroy() {
+	}
 }
