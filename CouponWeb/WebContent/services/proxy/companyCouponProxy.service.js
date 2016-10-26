@@ -17,14 +17,15 @@ angular.module("Coupon")
         }
 
         this.update = function (id, coupon) {
-            var couponToUpdate = angular.copy(coupon);
-            couponToUpdate.id = id;
-
+        	coupon.id = id;
+        	var coupToUpdate=angular.copy(coupon);
+        	console.log(coupon);
             return $http({
                 method: 'POST',
                 url: baseUrl + "/updateCoupon",
                 headers: {'Content-Type': 'application/json'},
-                data: couponToUpdate
+                data: coupToUpdate
+                
             });
         }
 

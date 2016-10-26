@@ -15,6 +15,8 @@ import com.couponproject.beans.Coupon;
 import com.couponproject.constants.CouponType;
 import com.couponproject.facade.CompanyFacade;
 
+import sun.misc.IOUtils;
+
 
 @Path("/company")
 public class CompanyServlet {
@@ -59,6 +61,7 @@ public class CompanyServlet {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Coupon updateCoupon(Coupon coupon){
 		//getting the companyFacade saved in the session
+		System.out.println(coupon);
 		CompanyFacade compFacade = (CompanyFacade) request.getSession().getAttribute(Facade_Attr);		
 		//the updateCoupon function
 		compFacade.updateCoupon(coupon);

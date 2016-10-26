@@ -1,7 +1,7 @@
 angular.module("Coupon")
     .controller("companyController", function
         ($scope, $http, $rootScope, couponUtil,
-         loginProxy, companyProxy, couponFactory) {
+         loginProxy, companyCouponProxy, couponFactory) {
 
         // Coupons model array
         $scope.coupons = [];
@@ -61,7 +61,8 @@ angular.module("Coupon")
         // Add/Update coupon (presest)
         //TODO: update is limited to End date and price
         $scope.addUpdateCoupon = function (data, index) {
-            if ($scope.coupons[index].id == null) {
+           
+        	if ($scope.coupons[index].id == null) {
                 // Add new company to db
                 companyCouponProxy.create(data)
                     .then(
@@ -75,7 +76,8 @@ angular.module("Coupon")
                         });
             } else {
                 // Update coupon in DB
-                companyCouponProxy.update($scope.coupons[index].id, data).then(
+                companyCouponProxy.update($scope.coupons[index].id, data)
+                .then(
                     function successCallback(response) {
                         logResponse('Coupon updated', response);
                         // update model
