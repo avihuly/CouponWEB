@@ -15,21 +15,16 @@ angular.module("Coupon")
         // password validation method //TODO: ask danny if to move and how?
         $scope.onberofesavePASSWORD = function (data) {
             return couponUtil.passwordValidation(data);
-        }
+        };
 
         // coupon validation method
         $scope.onberofesaveCouponTitle = function (data) {
             var coupTitle = [];
             for (var i = 0; i < $scope.coupons.length; i++) {
-            	coupTitle.push($scope.coupons[i].coupTitle);
+            	coupTitle.push($scope.coupons[i].title);
             }
             return couponUtil.usernameValidation(data, coupTitle);
-        }
-
-        // Clear Search Text
-        $scope.ClearSearchText = function () {
-            $scope.searchText = '';
-        }
+        };
 
 
         /////////////
@@ -90,7 +85,7 @@ angular.module("Coupon")
                         logResponse('ERROR:', response);
                     });
             }
-        }
+        };
 
         // Add ROW for new coupon
         $scope.addRowForCoupon = function () {

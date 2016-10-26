@@ -9,6 +9,6 @@ angular.module("Coupon")
            	type: '',
            	message: '',
            	price: '',
-           	image: '',
+           	image: ''
         	}
     	});

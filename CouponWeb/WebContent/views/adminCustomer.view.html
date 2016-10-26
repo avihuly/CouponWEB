@@ -8,7 +8,7 @@
         </thead>
         <!--each table row represent a compny-->
         <tr ng-repeat="customer in customers | filter:searchText">
-            <td ng-click="getCustomerCoupons(customer.id, $index)">
+            <td>
             <!-- row 10-11 shold be customer?? -->
                 <!--customer name-->
                 <span editable-text="customer.name"
@@ -19,7 +19,7 @@
                             {{customer.name}}
                         </span>
             </td>
-            <td ng-click="getCustomerCoupons(customer.id, $index)">
+            <td>
                 <!--Password-->
                 <span editable-text="customer.password"
                       e-name="password"
@@ -45,6 +45,7 @@
                     </button>
                 </form>
                 <div class="buttons" ng-show="!customerform.$visible">
+                    <button class="btn btn-info" ng-click="getCustomerCoupons(customer.id, $index)">coupons</button>
                     <button class="btn btn-primary" ng-click="customerform.$show()">edit</button>
                     <button class="btn btn-danger" ng-click="removeCustomer($index)">del</button>
                 </div>

@@ -20,7 +20,7 @@ angular.module("Coupon")
         // password validation method //TODO: ask danny if to move and how?
         $scope.onberofesavePASSWORD = function (data) {
             return couponUtil.passwordValidation(data);
-        }
+        };
 
         // company validation method
         $scope.onberofesaveCompanyName = function (data) {
@@ -29,7 +29,7 @@ angular.module("Coupon")
                 names.push($scope.companies[i].name);
             }
             return couponUtil.usernameValidation(data, names);
-        }
+        };
 
         // customer validation method
         $scope.onberofesaveCustomerName = function (data) {
@@ -38,12 +38,12 @@ angular.module("Coupon")
                 names.push($scope.customers[i].name);
             }
             return couponUtil.usernameValidation(data, names);
-        }
+        };
 
         // Clear Search Text
         $scope.ClearSearchText = function () {
             $scope.searchText = '';
-        }
+        };
 
 
         /////////////
@@ -63,17 +63,21 @@ angular.module("Coupon")
 
         // Remove company
         $scope.removeCompany = function (index) {
-            companyProxy.remove($scope.companies[index].id)
-                .then(
-                    function successCallback(response) {
-                        console.log('DELETED:');
-                        console.log(response.data);
-                        // Delete comapny from model
-                        $scope.companies.splice(index, 1);
-                    },
-                    function errorCallback(response) {
-                        logResponse('ERROR:', response);
-                    });
+            if ($scope.companies[index].id == !null) {
+                companyProxy.remove($scope.companies[index].id)
+                    .then(
+                        function successCallback(response) {
+                            console.log('DELETED:');
+                            console.log(response.data);
+                            // Delete comapny from model
+                            $scope.companies.splice(index, 1);
+                        },
+                        function errorCallback(response) {
+                            logResponse('ERROR:', response);
+                        });
+            } else {
+                $scope.companies.splice(index, 1);
+            }
         };
 
         // Add/Update company (presest)
@@ -102,7 +106,7 @@ angular.module("Coupon")
                         logResponse('ERROR:', response);
                     });
             }
-        }
+        };
 
         // Get all company coupons
         $scope.getCompanyCoupons = function (id, index) {
@@ -111,16 +115,16 @@ angular.module("Coupon")
                     function successCallback(response) {
                         $scope.companies[index].coupons = response.data;
                         $scope.focusOn = $scope.companies[index];
-                        $scope.sideBarRadioClickModel =  "views/coupons.view.html"
+                        $scope.sideBarRadioClickModel = "views/coupons.view.html"
                     },
                     function errorCallback(response) {
                         logResponse('ERROR:', response);
                     });
-        }
+        };
 
         // Add ROW for new company
         $scope.addRowForCompany = function () {
-            $scope.companies.push(companyFactory());
+            $scope.companies.push(companyFactory);
         };
 
 
@@ -141,18 +145,21 @@ angular.module("Coupon")
 
         // Remove customer
         $scope.removeCustomer = function (index) {
-            console.log(index);
-            customerProxy.remove($scope.customers[index].id)
-                .then(
-                    function successCallback(response) {
-                        console.log('DELETED:');
-                        console.log(response.data);
-                        // Delete comapny from model
-                        $scope.customers.splice(index, 1);
-                    },
-                    function errorCallback(response) {
-                        logResponse('ERROR:', response);
-                    });
+            if ($scope.customers[index].id == !null) {
+                customerProxy.remove($scope.customers[index].id)
+                    .then(
+                        function successCallback(response) {
+                            console.log('DELETED:');
+                            console.log(response.data);
+                            // Delete comapny from model
+                            $scope.customers.splice(index, 1);
+                        },
+                        function errorCallback(response) {
+                            logResponse('ERROR:', response);
+                        });
+            } else {
+                $scope.customers.splice(index, 1);
+            }
         };
 
         // Add/Update customer (presest)
@@ -180,7 +187,7 @@ angular.module("Coupon")
                         logResponse('ERROR:', response);
                     });
             }
-        }
+        };
 
         // Get all customer coupons
         $scope.getCustomerCoupons = function (id, index) {
@@ -189,15 +196,15 @@ angular.module("Coupon")
                     function successCallback(response) {
                         $scope.customers[index].coupons = response.data;
                         $scope.focusOn = $scope.customers[index];
-                        $scope.sideBarRadioClickModel =  "views/coupons.view.html"
+                        $scope.sideBarRadioClickModel = "views/coupons.view.html"
                     },
                     function errorCallback(response) {
                         logResponse('ERROR:', response);
                     });
-        }
+        };
 
         // Add ROW for new company
         $scope.addRowForCustomer = function () {
-            $scope.customers.push(customerFactory());
+            $scope.customers.push(customerFactory);
         };
     });
