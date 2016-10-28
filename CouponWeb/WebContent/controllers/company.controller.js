@@ -1,7 +1,8 @@
 angular.module("Coupon")
     .controller("companyController", function
         ($scope, $http, $rootScope, couponUtil,
-         loginProxy, companyCouponProxy, couponFactory) {
+         loginProxy, companyCouponProxy, couponFactory,
+        companyFactory) {
 
         // Coupons model array
         $scope.coupons = [];
@@ -12,16 +13,29 @@ angular.module("Coupon")
         // sidebar navigation click model
         $scope.sideBarRadioClickModel = "views/companyCoupon.view.html";
 
+        // Datepicker
+        $scope.endDate = "1984-05-14T21:00:00.000Z";
+
+        $scope.opened = {};
+
+        $scope.open = function($event, elementOpened) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.opened[elementOpened] = !$scope.opened[elementOpened];
+        };
+
+
         // coupon validation method
         $scope.onberofesaveCouponTitle = function (data) {
             var coupTitle = [];
             for (var i = 0; i < $scope.coupons.length; i++) {
-            	coupTitle.push($scope.coupons[i].title);
+                coupTitle.push($scope.coupons[i].title);
             }
             return couponUtil.nameValidation(data, coupTitle);
         };
 
-        $scope.onbeforesaveCouponEndDate =function (endDate) {
+        $scope.onbeforesaveCouponEndDate = function (endDate) {
             // TODO: implement
             return true;
         };
@@ -31,10 +45,10 @@ angular.module("Coupon")
         /////////////
         // Get all coupons
         $scope.getAllCoupons = function () {
-        	companyCouponProxy.getAll()
+            companyCouponProxy.getAll()
                 .then(
                     function successCallback(response) {
-                    	$scope.coupons = response.data;
+                        $scope.coupons = response.data;
                     },
                     function errorCallback(response) {
                         logResponse('ERROR:', response);
@@ -56,25 +70,25 @@ angular.module("Coupon")
                     });
         };
 
-        // Add/Update coupon (presest)
+        // Add coupon (presest)
+        $scope.addCoupon = function (data) {
+            companyCouponProxy.create(data)
+                .then(
+                    function successCallback(response) {
+                        logResponse('New coupon added to DB:', response);
+                        // update model
+                        $scope.coupons[index] = response.data;
+                    },
+                    function errorCallback(response) {
+                        logResponse('ERROR:', response);
+                    });
+        };
+
+        // Update coupon (presest)
         //TODO: update is limited to End date and price
-        $scope.addUpdateCoupon = function (data, index) {
-           
-        	if ($scope.coupons[index].id == null) {
-                // Add new company to db
-                companyCouponProxy.create(data)
-                    .then(
-                        function successCallback(response) {
-                            logResponse('New coupon added to DB:', response);
-                            // update model
-                            $scope.coupons[index] = response.data;
-                        },
-                        function errorCallback(response) {
-                            logResponse('ERROR:', response);
-                        });
-            } else {
-                // Update coupon in DB
-                companyCouponProxy.update($scope.coupons[index].id, data)
+        $scope.updateCoupon = function (data, index) {
+            // Update coupon in DB
+            companyCouponProxy.update($scope.coupons[index].id, data)
                 .then(
                     function successCallback(response) {
                         logResponse('Coupon updated', response);
@@ -84,13 +98,12 @@ angular.module("Coupon")
                     function errorCallback(response) {
                         logResponse('ERROR:', response);
                     });
-            }
         };
 
-    // TODO: getCouponsByID
-     // TODO: getCouponsByType
-     // TODO: getCouponByPrice
-     // TODO: getCouponStartDate
-     // TODO: getCouponEndDate
+        // TODO: getCouponsByID
+        // TODO: getCouponsByType
+        // TODO: getCouponByPrice
+        // TODO: getCouponStartDate
+        // TODO: getCouponEndDate
 
     });

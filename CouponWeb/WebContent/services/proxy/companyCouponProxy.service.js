@@ -1,5 +1,5 @@
 angular.module("Coupon")
-    .service('companyCouponProxy', function ($http) {
+    .service('companyCouponProxy', function ($http, couponFactory) {
         var baseUrl = "coupon/company";
 
 
@@ -17,18 +17,17 @@ angular.module("Coupon")
         }
 
         this.update = function (id, coupon) {
-        	coupon.id = id;
-        	// var coupToUpdate=angular.copy(coupon);
-
-            console.log("coupon" ,coupon);
-
-            // console.log("coupToUpdate" ,coupToUpdate);
+            // server needs a full coupon object
+            var couponToUpdate = couponFactory();
+            couponToUpdate.id = id;
+            couponToUpdate.price = coupon.price;
+            couponToUpdate.endDate = coupon.endDate;
 
             return $http({
                 method: 'POST',
                 url: baseUrl + "/updateCoupon",
                 headers: {'Content-Type': 'application/json'},
-                data: coupon
+                data: couponToUpdate
             })
         }
 

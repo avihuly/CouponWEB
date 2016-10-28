@@ -20,13 +20,39 @@
             <td>{{coupon.startDate}}</td>
             <!--end date-->
             <td>
+                <!---->
+                <!---->
+                <!---->
+                <!---->
+                <!---->
+                <!---->
+                <a href="#"
+                   editable-bsdate="endDate"
+                   e-is-open="opened.$data"
+                   e-ng-click="open($event,'$data')"
+                   e-datepicker-popup="dd-MMMM-yyyy">
+                    {{ (endDate | date:"dd/MM/yyyy") || 'empty' }}
+                </a>
+                <!---->
+                <!---->
+                <!---->
+                <!---->
+                <!---->
+                <!---->
+                <!--old end date-->
                 <span editable-text="coupon.endDate"
-                      e-name="coupEndDate"
+                      e-name="endDate"
                       e-form="couponform"
                       e-placeholder="coupon end date"
                       onbeforesave="onbeforesaveCouponEndDate($data)">
                             {{coupon.endDate}}
                 </span>
+                <!---->
+                <!---->
+                <!---->
+                <!---->
+                <!---->
+                <!---->
             </td>
             <!--amount-->
             <td>{{coupon.amount}}</td>
@@ -37,7 +63,7 @@
             <!--price-->
             <td>
                 <span editable-text="coupon.price"
-                      e-name="coupPrice"
+                      e-name="price"
                       e-form="couponform"
                       e-placeholder="coupon price">
                             {{coupon.price}}
@@ -49,7 +75,7 @@
             <!-- form - edit buttons  -->
             <td style="white-space: nowrap">
                 <form editable-form name="couponform"
-                      onbeforesave="addUpdateCoupon($data, $index)"
+                      onbeforesave="updateCoupon($data, $index)"
                       ng-show="couponform.$visible"
                       class="form-buttons form-inline"> <!--shown="inserted == user">-->
                     <button type="submit" ng-disabled="couponform.$waiting" class="btn btn-primary">
