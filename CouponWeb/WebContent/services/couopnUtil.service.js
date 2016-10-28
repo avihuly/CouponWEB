@@ -15,10 +15,10 @@ angular.module("Coupon")
     }
 
     // return false if user name exsist
-    this.usernameValidation = function (username, userNames) {
-        if (username.length < 1){
+    this.nameValidation = function (name, names) {
+        if (names.length < 1){
             return "User name can't be empty";
-        } else if (userNames.indexOf(username) > -1) {
+        } else if (names.indexOf(name) > -1) {
             return "User name already exist";
         } else {
             return true;

@@ -1,13 +1,9 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-12"><h1> Coupon Web </h1></div>
-    </div>
+
+    <ng-include src="'views/header.view.html'"></ng-include>
 
     <div class="row">
-        <div class="col-12"><h6> {{clientType}} view </h6></div>
-    </div>
-
-    <div class="row">
+        <br/>
         <!--Side navigation bar-->
         <div class="col-md-2">
             <div class="btn-group">
@@ -16,6 +12,11 @@
                         uib-btn-radio="'views/companyCoupon.view.html'"
                         ng-click="getAllCoupons()">
                     <span class="glyphicon glyphicon-tower" aria-hidden="true"></span> Coupons
+                </button>
+                <button class="btn btn-primary list-group-item form-control"
+                        ng-model="sideBarRadioClickModel"
+                        uib-btn-radio="'views/newCoupon.view.html'">
+                    <span class="glyphicon glyphicon-open" aria-hidden="true"></span> New coupon
                 </button>
             </div>
         </div>
@@ -31,7 +32,7 @@
                 </span>
             </div>
             <br/><br/>
-            <ng-include src="sideBarRadioClickModel"/>
+            <ng-include src="sideBarRadioClickModel"></ng-include>
         </div>
     </div>
 </div>

@@ -11,3 +11,20 @@ table, td, tr {
     margin: 0 auto;
     text-align: left;
 }
+
+#top {
+    background-color: #888888;
+}
+
+#logoffBnt {
+    width: 80%;
+    margin-top: 30px;
+}
+
+#logoffDiv {
+    text-align:center;
+}
+
+/*#sideBar {*/
+    /*background-color: darkslateblue;*/
+/*}*/

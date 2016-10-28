@@ -13,94 +13,41 @@
         </tr>
         </thead>
         <!--each table row represent a coupon-->
-        <tr ng-repeat="coupon in coupons | filter:searchText"
-            > 
+        <tr ng-repeat="coupon in coupons | filter:searchText">
+            <!--coupon title-->
+            <td>{{coupon.title}}</td>
+            <!--start date-->
+            <td>{{coupon.startDate}}</td>
+            <!--end date-->
             <td>
-                <!--coupon title-->
-                <span editable-text="coupon.title"
-                      e-name="coupTitle"
-                      e-form="couponform"
-                      e-placeholder="coupon title"
-                      onbeforesave="onbeforesaveCouponTitle($data)">
-                            {{coupon.title}}
-                        </span>
-            </td>
-            <td>
-                <!--start tate-->
-                <span editable-text="coupon.startDate"
-                      e-name="coupStartDate"
-                      e-form="couponform"
-                      e-placeholder="coupon start date"
-                      onbeforesave="onbeforesaveCouponStartDate($data)">
-                            {{coupon.startDate}}
-                        </span>
-            </td>
-            <td>
-                <!--end date-->
                 <span editable-text="coupon.endDate"
                       e-name="coupEndDate"
                       e-form="couponform"
                       e-placeholder="coupon end date"
                       onbeforesave="onbeforesaveCouponEndDate($data)">
                             {{coupon.endDate}}
-                        </span>
+                </span>
             </td>
+            <!--amount-->
+            <td>{{coupon.amount}}</td>
+            <!--type-->
+            <td>{{coupon.type}}</td>
+            <!--message-->
+            <td>{{coupon.message}}</td>
+            <!--price-->
             <td>
-                <!--amount-->
-                <span editable-text="coupon.amount"
-                      e-name="coupAmount"
-                      e-form="couponform"
-                      e-placeholder="coupon amount"
-                      onbeforesave="onbeforesaveCouponAmount($data)">
-                            {{coupon.amount}}
-                        </span>
-            </td>
-            <td>
-                <!--type-->
-                <span editable-text="coupon.type"
-                      e-name="coupType"
-                      e-form="couponform"
-                      e-placeholder="coupon type"
-                      onbeforesave="onbeforesaveCoupontype($data)">
-                            {{coupon.type}}
-                        </span>
-            </td>
-            <td>
-                <!--message-->
-                <span editable-text="coupon.message"
-                      e-name="coupMessage"
-                      e-form="couponform"
-                      e-placeholder="coupon message"
-                      onbeforesave="onbeforesaveCouponMessage($data)">
-                            {{coupon.message}}
-                        </span>
-            </td>
-            <td>
-                <!--price-->
                 <span editable-text="coupon.price"
                       e-name="coupPrice"
                       e-form="couponform"
-                      e-placeholder="coupon price"
-                      onbeforesave="onbeforesaveCouponPrice($data)">
+                      e-placeholder="coupon price">
                             {{coupon.price}}
-                        </span>
+                </span>
             </td>
-            <td>
-                <!--image-->
-                <span editable-text="coupon.image"
-                      e-name="coupImage"
-                      e-form="couponform"
-                      e-placeholder="coupon image"
-                      onbeforesave="onbeforesaveCouponImage($data)">
-                      <img ng-src="{{coupon.image}}" 
-                      class="img-responsive"
-                      >     
-                 </span>
-            </td>
-            
-            
+            <!--image-->
+            <td><img ng-src="{{coupon.image}}" class="img-responsive"></td>
+
+            <!-- form - edit buttons  -->
             <td style="white-space: nowrap">
-                <!-- form - edit buttons  -->
                 <form editable-form name="couponform"
                       onbeforesave="addUpdateCoupon($data, $index)"
                       ng-show="couponform.$visible"
@@ -121,5 +68,4 @@
         </tr>
     </table>
     </br>
-    <button class="btn btn-default" ng-click="addRowForCoupon()">Add row</button>
 </div>

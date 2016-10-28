@@ -23,12 +23,8 @@ angular.module("Coupon")
         };
 
         // company validation method
-        $scope.onberofesaveCompanyName = function (data) {
-            var names = [];
-            for (var i = 0; i < $scope.companies.length; i++) {
-                names.push($scope.companies[i].name);
-            }
-            return couponUtil.usernameValidation(data, names);
+        $scope.onberofesaveCompanyName = function (name) {
+            return couponUtil.nameValidation(name, $scope.companies);
         };
 
         // customer validation method
@@ -37,7 +33,7 @@ angular.module("Coupon")
             for (var i = 0; i < $scope.customers.length; i++) {
                 names.push($scope.customers[i].name);
             }
-            return couponUtil.usernameValidation(data, names);
+            return couponUtil.nameValidation(data, names);
         };
 
         // Clear Search Text
@@ -124,7 +120,7 @@ angular.module("Coupon")
 
         // Add ROW for new company
         $scope.addRowForCompany = function () {
-            $scope.companies.push(companyFactory);
+            $scope.companies.push(companyFactory());
         };
 
 
@@ -205,6 +201,6 @@ angular.module("Coupon")
 
         // Add ROW for new company
         $scope.addRowForCustomer = function () {
-            $scope.customers.push(customerFactory);
+            $scope.customers.push(customerFactory());
         };
     });

@@ -12,20 +12,19 @@ angular.module("Coupon")
         // sidebar navigation click model
         $scope.sideBarRadioClickModel = "views/companyCoupon.view.html";
 
-        // password validation method //TODO: ask danny if to move and how?
-        $scope.onberofesavePASSWORD = function (data) {
-            return couponUtil.passwordValidation(data);
-        };
-
         // coupon validation method
         $scope.onberofesaveCouponTitle = function (data) {
             var coupTitle = [];
             for (var i = 0; i < $scope.coupons.length; i++) {
             	coupTitle.push($scope.coupons[i].title);
             }
-            return couponUtil.usernameValidation(data, coupTitle);
+            return couponUtil.nameValidation(data, coupTitle);
         };
 
+        $scope.onbeforesaveCouponEndDate =function (endDate) {
+            // TODO: implement
+            return true;
+        };
 
         /////////////
         // COUPON //
@@ -35,7 +34,6 @@ angular.module("Coupon")
         	companyCouponProxy.getAll()
                 .then(
                     function successCallback(response) {
-                       console.debug(response.data);
                     	$scope.coupons = response.data;
                     },
                     function errorCallback(response) {
@@ -89,12 +87,7 @@ angular.module("Coupon")
             }
         };
 
-        // Add ROW for new coupon
-        $scope.addRowForCoupon = function () {
-            $scope.coupons.push(couponFactory());
-        };
-
-        // TODO: getCouponsByID
+    // TODO: getCouponsByID
      // TODO: getCouponsByType
      // TODO: getCouponByPrice
      // TODO: getCouponStartDate

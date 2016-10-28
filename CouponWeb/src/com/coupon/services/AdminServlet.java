@@ -1,6 +1,9 @@
 package com.coupon.services;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -23,6 +26,16 @@ public class AdminServlet {
 
 	@Context
 	private HttpServletRequest request;
+	@Context private HttpServletResponse response;
+	
+	@GET
+	@Path("/logOff")
+	@Produces(MediaType.TEXT_PLAIN)
+	public void logOff () throws IOException { //TODO: Map Exception to repsonse 
+		// getting the adminFacade saved in the session
+		request.getSession().invalidate();
+		response.sendRedirect("http://localhost:8080/CouponWeb/index.html");	
+	}
 	
 	//////////////////// *************** /////////////////
 	//////////////////// COMPANY METHODS /////////////////

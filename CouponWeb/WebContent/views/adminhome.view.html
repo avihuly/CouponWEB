@@ -1,15 +1,23 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-12"><h1> Coupon Web </h1></div>
-    </div>
-
-    <div class="row">
-        <div class="col-12"><h6> {{clientType}} view </h6></div>
-    </div>
-
-    <div class="row">
-        <!--Side navigation bar-->
+    <div class="row" id="top">
+        <div class="col-md-10">
+            <div><h1> Coupon Web </h1></div>
+            <div><h5> {{clientType}} view </h5></div>
+        </div>
         <div class="col-md-2">
+            <div id="logoffDiv">
+                <a id="logoffBnt"
+                   href="http://localhost:8080/CouponWeb/coupon/admin/logOff"
+                   class="btn btn-default"
+                   role="button">log out</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <br/>
+        <!--Side navigation bar-->
+        <div class="col-md-2" id="sideBar">
             <div class="btn-group">
                 <button class="btn btn-primary list-group-item form-control"
                         ng-model="sideBarRadioClickModel"
@@ -37,7 +45,7 @@
                 </span>
             </div>
             <br/><br/>
-            <ng-include src="sideBarRadioClickModel"/>
+            <ng-include src="sideBarRadioClickModel"></ng-include>
         </div>
     </div>
 </div>

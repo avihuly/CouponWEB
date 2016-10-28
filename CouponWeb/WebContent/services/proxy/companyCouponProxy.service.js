@@ -18,15 +18,18 @@ angular.module("Coupon")
 
         this.update = function (id, coupon) {
         	coupon.id = id;
-        	var coupToUpdate=angular.copy(coupon);
-        	console.log(coupon);
+        	// var coupToUpdate=angular.copy(coupon);
+
+            console.log("coupon" ,coupon);
+
+            // console.log("coupToUpdate" ,coupToUpdate);
+
             return $http({
                 method: 'POST',
                 url: baseUrl + "/updateCoupon",
                 headers: {'Content-Type': 'application/json'},
-                data: coupToUpdate
-                
-            });
+                data: coupon
+            })
         }
 
         this.remove = function (id) {
