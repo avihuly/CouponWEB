@@ -2,7 +2,7 @@ angular.module("Coupon")
     .controller("companyController", function
         ($scope, $http, $rootScope, couponUtil,
          loginProxy, companyCouponProxy, couponFactory,
-        companyFactory) {
+         companyFactory) {
 
         // Coupons model array
         $scope.coupons = [];
@@ -13,18 +13,22 @@ angular.module("Coupon")
         // sidebar navigation click model
         $scope.sideBarRadioClickModel = "views/companyCoupon.view.html";
 
+        //////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////
         // Datepicker
-        $scope.endDate = "1984-05-14T21:00:00.000Z";
 
         $scope.opened = {};
-
-        $scope.open = function($event, elementOpened) {
+        $scope.open = function ($event, elementOpened) {
+            console.log("elementOpened:",elementOpened)
             $event.preventDefault();
             $event.stopPropagation();
 
             $scope.opened[elementOpened] = !$scope.opened[elementOpened];
         };
-
+        /////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////
 
         // coupon validation method
         $scope.onberofesaveCouponTitle = function (data) {
@@ -33,11 +37,6 @@ angular.module("Coupon")
                 coupTitle.push($scope.coupons[i].title);
             }
             return couponUtil.nameValidation(data, coupTitle);
-        };
-
-        $scope.onbeforesaveCouponEndDate = function (endDate) {
-            // TODO: implement
-            return true;
         };
 
         /////////////
@@ -49,6 +48,11 @@ angular.module("Coupon")
                 .then(
                     function successCallback(response) {
                         $scope.coupons = response.data;
+                        // parse date
+                        for (var i = 0; i < $scope.coupons.length; i++) {
+                            $scope.coupons[i].endDate = Date.parse($scope.coupons[i].endDate)
+                            $scope.coupons[i].startDate = Date.parse($scope.coupons[i].startDate)
+                        }
                     },
                     function errorCallback(response) {
                         logResponse('ERROR:', response);
@@ -85,7 +89,6 @@ angular.module("Coupon")
         };
 
         // Update coupon (presest)
-        //TODO: update is limited to End date and price
         $scope.updateCoupon = function (data, index) {
             // Update coupon in DB
             companyCouponProxy.update($scope.coupons[index].id, data)
