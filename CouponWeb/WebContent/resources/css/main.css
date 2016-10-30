@@ -25,6 +25,11 @@ table, td, tr {
     text-align:center;
 }
 
+
+#newCouponView {
+    text-align:left;
+}
+
 /*#sideBar {*/
     /*background-color: darkslateblue;*/
 /*}*/

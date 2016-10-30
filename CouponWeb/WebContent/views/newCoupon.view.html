@@ -1,3 +1,71 @@
-<div>
-    <h1> New Coupon view </h1>
+<div id="newCouponView">
+    <h3> New Coupon: </h3>
+
+    <div class="form-group">
+        <label>Title</label>
+        <input ng-model="couponToCreate.title"
+               type=text
+               class="form-control"
+               placeholder="Name">
+    </div>
+    <div class="form-group">
+        <label>Type</label>
+        <select class="form-control"
+                ng-model="couponToCreate.type"
+                ng-options="type for type in types"
+                placeholder="Type">
+            <option value="" disabled selected>Select your option</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <input ng-model="couponToCreate.message"
+               type=text
+               class="form-control"
+               placeholder="Description">
+    </div>
+    <div class="form-group">
+        <label>Price</label>
+        <input ng-model="couponToCreate.price"
+               type=number
+               class="form-control"
+               placeholder="Price">
+    </div>
+    <div class="form-group">
+        <label>Amount</label>
+        <input ng-model="couponToCreate.amount"
+               type=number
+               class="form-control"
+               placeholder="Amount">
+    </div>
+    <div class="form-group">
+        <label>Start date</label>
+        <div class="input-group">
+            <input type="text"
+                   class="form-control"
+                   uib-datepicker-popup="dd-MMMM-yyyy"
+                   ng-model="couponToCreate.startDate"
+                   is-open="StartDatePikerOpen.opened"
+                   datepicker-options="dateOptions"
+                   ng-required="true"
+                   close-text="Close"/>
+            <span class="input-group-btn">
+            <button type="button" class="btn btn-default" ng-click="open1()"><i
+                    class="glyphicon glyphicon-calendar"></i></button>
+          </span>
+        </div>
+    </div>
+
+
+    <button class="btn btn-default" ng-click="addCoupon(Coupon)">Submit</button>
+
+    : '',
+    startDate: '',
+    endDate: '',
+    : '',
+    : '',
+    : '',
+    : '',
+    image: ''
+
 </div>

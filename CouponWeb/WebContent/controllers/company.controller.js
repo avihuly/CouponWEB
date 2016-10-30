@@ -13,11 +13,17 @@ angular.module("Coupon")
         // sidebar navigation click model
         $scope.sideBarRadioClickModel = "views/companyCoupon.view.html";
 
-        //////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////
+        //New Coupon
+        $scope.couponToCreate = couponFactory();
+        $scope.types = ["RESTAURANT", "ELECTRICITY", "FOOD", "HEALTH",
+                        "SPORTS", "CAMPING", "TRAVELLING"];
+        $scope.StartDatePikerOpen = function() {
+            $scope.StartDatePikerOpen.opened = true;
+        };
+
+
         ////////////////////////////////////////////////////
         // Datepicker
-
         $scope.opened = {};
         $scope.open = function ($event, elementOpened) {
             console.log("elementOpened:",elementOpened)
@@ -27,8 +33,6 @@ angular.module("Coupon")
             $scope.opened[elementOpened] = !$scope.opened[elementOpened];
         };
         /////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////
 
         // coupon validation method
         $scope.onberofesaveCouponTitle = function (data) {
@@ -39,9 +43,9 @@ angular.module("Coupon")
             return couponUtil.nameValidation(data, coupTitle);
         };
 
-        /////////////
+        ////////////
         // COUPON //
-        /////////////
+        ////////////
         // Get all coupons
         $scope.getAllCoupons = function () {
             companyCouponProxy.getAll()
@@ -74,21 +78,21 @@ angular.module("Coupon")
                     });
         };
 
-        // Add coupon (presest)
+        // Add coupon
         $scope.addCoupon = function (data) {
             companyCouponProxy.create(data)
                 .then(
                     function successCallback(response) {
                         logResponse('New coupon added to DB:', response);
                         // update model
-                        $scope.coupons[index] = response.data;
+                        $scope.coupons.push(response.data);
                     },
                     function errorCallback(response) {
                         logResponse('ERROR:', response);
                     });
         };
 
-        // Update coupon (presest)
+        // Update coupon
         $scope.updateCoupon = function (data, index) {
             // Update coupon in DB
             companyCouponProxy.update($scope.coupons[index].id, data)
@@ -108,5 +112,4 @@ angular.module("Coupon")
         // TODO: getCouponByPrice
         // TODO: getCouponStartDate
         // TODO: getCouponEndDate
-
     });
