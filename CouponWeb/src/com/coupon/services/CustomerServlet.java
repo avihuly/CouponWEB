@@ -92,4 +92,17 @@ public class CustomerServlet {
 		// return result
 		return custFacade.getAllPurchasedCouponsByPrice(price).toArray(new Coupon[]{});
 	}	
+	
+	//Collection<Coupon> getAllCoupons()
+	//this method gets all the coupons in the coupon system
+	@POST
+	@Path("/purchasedByPrice")
+	@Consumes(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Coupon[] getAllcoupons() {
+		//getting the customerFacade saved in the session
+		CustomerFacade custFacade = (CustomerFacade) request.getSession().getAttribute(Facade_Attr);
+		// return result
+		return custFacade.getAllCoupons().toArray(new Coupon[]{});
+	}
 }
