@@ -95,9 +95,8 @@ public class CustomerServlet {
 	
 	//Collection<Coupon> getAllCoupons()
 	//this method gets all the coupons in the coupon system
-	@POST
-	@Path("/purchasedByPrice")
-	@Consumes(MediaType.TEXT_PLAIN)
+	@GET
+	@Path("/browseCoupon")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Coupon[] getAllcoupons() {
 		//getting the customerFacade saved in the session
