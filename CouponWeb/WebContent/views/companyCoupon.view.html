@@ -17,18 +17,16 @@
             <!--coupon title-->
             <td>{{coupon.title}}</td>
             <!--start date-->
-            <td>{{(coupon.startDate | date:"dd/MM/yyyy")}}</td>
+            <td>{{(coupon.startDate)}}</td>
             <!--end date-->
             <td>
-                <a href="#"
-                   editable-bsdate={{coupon.endDate}}
-                   e-ng-click="open($event,'$data')"
-                   e-is-open="opened.$data"
-                   e-datepicker-popup="dd-MMMM-yyyy">
-                    <!--e-name="endDate"-->
-                    <!--e-form="couponform"-->
-                    {{ (coupon.endDate | date:"dd/MM/yyyy") || 'empty' }}
-                </a>
+                <span editable-text="coupon.endDate"
+                          e-name="endDate"
+                          e-form="couponform"
+                          e-placeholder="coupon end date"
+                          onbeforesave="onberofesaveEndDate($data)">
+                            {{coupon.endDate}}
+                </span>
             </td>
             <!--amount-->
             <td>{{coupon.amount}}</td>

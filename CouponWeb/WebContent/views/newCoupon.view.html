@@ -1,71 +1,92 @@
-<div id="newCouponView">
+<div id="newCouponView" class="col-md-6">
     <h3> New Coupon: </h3>
 
+    <!--Title-->
     <div class="form-group">
         <label>Title</label>
-        <input ng-model="couponToCreate.title"
+        <input ng-model="couponTemplate.title"
                type=text
                class="form-control"
                placeholder="Name">
     </div>
+
+    <!--Type-->
     <div class="form-group">
         <label>Type</label>
         <select class="form-control"
-                ng-model="couponToCreate.type"
+                ng-model="couponTemplate.type"
                 ng-options="type for type in types"
                 placeholder="Type">
             <option value="" disabled selected>Select your option</option>
+            <!--as (type | capitalize)-->
         </select>
     </div>
+
+    <!--Description-->
     <div class="form-group">
         <label>Description</label>
-        <input ng-model="couponToCreate.message"
+        <textarea ng-model="couponTemplate.message"
                type=text
                class="form-control"
                placeholder="Description">
+        </textarea>
     </div>
+
+    <!--Price-->
     <div class="form-group">
         <label>Price</label>
-        <input ng-model="couponToCreate.price"
+        <input ng-model="couponTemplate.price"
                type=number
                class="form-control"
                placeholder="Price">
     </div>
+
+    <!--Amount-->
     <div class="form-group">
         <label>Amount</label>
-        <input ng-model="couponToCreate.amount"
+        <input ng-model="couponTemplate.amount"
                type=number
                class="form-control"
                placeholder="Amount">
     </div>
+
+    <!--Start date-->
     <div class="form-group">
         <label>Start date</label>
+        <input ng-model="couponTemplate.startDate"
+               type=date
+               class="form-control"
+               placeholder="Date">
+    </div>
+
+    <!--End date-->
+    <div class="form-group">
+        <label>End date</label>
+        <input ng-model="couponTemplate.endDate"
+               type=date
+               class="form-control"
+               placeholder="Date">
+    </div>
+
+    <!--Image-->
+    <div class="form-group">
+        <label>Image</label>
+        </br>
         <div class="input-group">
-            <input type="text"
+
+
+        <span class="btn btn-primary btn-file input-group-addon" id="addon">
+            Browse <input ng-model="couponTemplate.image"
+                          type=file
+                          class="form-control" class="form-control">
+        </span>
+            <input ng-model="couponTemplate.image"
+                   type=text
                    class="form-control"
-                   uib-datepicker-popup="dd-MMMM-yyyy"
-                   ng-model="couponToCreate.startDate"
-                   is-open="StartDatePikerOpen.opened"
-                   datepicker-options="dateOptions"
-                   ng-required="true"
-                   close-text="Close"/>
-            <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="open1()"><i
-                    class="glyphicon glyphicon-calendar"></i></button>
-          </span>
+                   aria-describedby="addon"
+                   placeholder="Image">
         </div>
     </div>
 
-
     <button class="btn btn-default" ng-click="addCoupon(Coupon)">Submit</button>
-
-    : '',
-    startDate: '',
-    endDate: '',
-    : '',
-    : '',
-    : '',
-    : '',
-    image: ''
-
 </div>

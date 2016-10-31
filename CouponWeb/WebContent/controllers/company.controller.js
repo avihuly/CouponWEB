@@ -1,8 +1,7 @@
 angular.module("Coupon")
     .controller("companyController", function
         ($scope, $http, $rootScope, couponUtil,
-         loginProxy, companyCouponProxy, couponFactory,
-         companyFactory) {
+         loginProxy, companyCouponProxy, couponFactory) {
 
         // Coupons model array
         $scope.coupons = [];
@@ -13,28 +12,7 @@ angular.module("Coupon")
         // sidebar navigation click model
         $scope.sideBarRadioClickModel = "views/companyCoupon.view.html";
 
-        //New Coupon
-        $scope.couponToCreate = couponFactory();
-        $scope.types = ["RESTAURANT", "ELECTRICITY", "FOOD", "HEALTH",
-                        "SPORTS", "CAMPING", "TRAVELLING"];
-        $scope.StartDatePikerOpen = function() {
-            $scope.StartDatePikerOpen.opened = true;
-        };
-
-
-        ////////////////////////////////////////////////////
-        // Datepicker
-        $scope.opened = {};
-        $scope.open = function ($event, elementOpened) {
-            console.log("elementOpened:",elementOpened)
-            $event.preventDefault();
-            $event.stopPropagation();
-
-            $scope.opened[elementOpened] = !$scope.opened[elementOpened];
-        };
-        /////////////////////////////////////////////////////////
-
-        // coupon validation method
+        // coupon update validation method
         $scope.onberofesaveCouponTitle = function (data) {
             var coupTitle = [];
             for (var i = 0; i < $scope.coupons.length; i++) {
@@ -42,6 +20,9 @@ angular.module("Coupon")
             }
             return couponUtil.nameValidation(data, coupTitle);
         };
+        $scope.onberofesaveEndDate = function (data) {
+            return couponUtil.dateValidation(data);
+        }
 
         ////////////
         // COUPON //
@@ -52,17 +33,11 @@ angular.module("Coupon")
                 .then(
                     function successCallback(response) {
                         $scope.coupons = response.data;
-                        // parse date
-                        for (var i = 0; i < $scope.coupons.length; i++) {
-                            $scope.coupons[i].endDate = Date.parse($scope.coupons[i].endDate)
-                            $scope.coupons[i].startDate = Date.parse($scope.coupons[i].startDate)
-                        }
                     },
                     function errorCallback(response) {
                         logResponse('ERROR:', response);
                     });
         };
-
         // Remove coupon
         $scope.removeCoupon = function (index) {
             companyCouponProxy.remove($scope.coupons[index].id)
@@ -77,7 +52,6 @@ angular.module("Coupon")
                         logResponse('ERROR:', response);
                     });
         };
-
         // Add coupon
         $scope.addCoupon = function (data) {
             companyCouponProxy.create(data)
@@ -91,7 +65,6 @@ angular.module("Coupon")
                         logResponse('ERROR:', response);
                     });
         };
-
         // Update coupon
         $scope.updateCoupon = function (data, index) {
             // Update coupon in DB
@@ -106,10 +79,24 @@ angular.module("Coupon")
                         logResponse('ERROR:', response);
                     });
         };
-
         // TODO: getCouponsByID
         // TODO: getCouponsByType
         // TODO: getCouponByPrice
         // TODO: getCouponStartDate
         // TODO: getCouponEndDate
+
+        ///////////////
+        //New Coupon //
+        ///////////////
+
+
+        $scope.generateCouponTemplate = function () {
+            $scope.couponTemplate = couponFactory();
+            $scope.couponTemplate.startDate = new Date;
+            $scope.couponTemplate.endDate = new Date;
+        }
+        $scope.types = ["RESTAURANT", "ELECTRICITY", "FOOD", "HEALTH",
+            "SPORTS", "CAMPING", "TRAVELLING"];
+
+
     });
