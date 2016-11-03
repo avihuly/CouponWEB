@@ -8,6 +8,15 @@ angular.module("Coupon")
         }
 
         this.create = function (coupon) {
+            coupon.startDate =
+                coupon.startDate.getFullYear() +
+                "-" + ("0" + coupon.startDate.getMonth()).slice(-2) +
+                "-" + ("0" + coupon.startDate.getDay()).slice(-2);
+            coupon.endDate =
+                coupon.endDate.getFullYear() +
+                "-" + ("0" + coupon.endDate.getMonth()).slice(-2) +
+                "-" + ("0" + coupon.endDate.getDay()).slice(-2);
+
             return $http({
                 method: 'POST',
                 url: baseUrl + "/createCoupon",
@@ -48,7 +57,7 @@ angular.module("Coupon")
                 data: id
             });
         }
-        
+
         //TODO: not sure I did it right
         this.getCouponsByType = function (type) {
             return $http({
@@ -58,7 +67,7 @@ angular.module("Coupon")
                 data: type
             });
         }
-        
+
       //TODO: not sure I did it right
        this.getCouponByPrice = function (price) {
             return $http({
@@ -68,7 +77,7 @@ angular.module("Coupon")
                 data: price
             });
         }
-        
+
       //TODO: not sure I did it right
        this.getCouponStartDate = function (date) {
             return $http({
@@ -78,7 +87,7 @@ angular.module("Coupon")
                 data: date
             });
         }
-       
+
      //TODO: not sure I did it right
        this.getCouponEndDate = function (date) {
             return $http({

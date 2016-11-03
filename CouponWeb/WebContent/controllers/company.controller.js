@@ -54,6 +54,9 @@ angular.module("Coupon")
         };
         // Add coupon
         $scope.addCoupon = function (data) {
+
+
+            console.debug($scope.couponTemplate);
             companyCouponProxy.create(data)
                 .then(
                     function successCallback(response) {
@@ -79,24 +82,23 @@ angular.module("Coupon")
                         logResponse('ERROR:', response);
                     });
         };
-        // TODO: getCouponsByID
-        // TODO: getCouponsByType
-        // TODO: getCouponByPrice
-        // TODO: getCouponStartDate
-        // TODO: getCouponEndDate
 
         ///////////////
         //New Coupon //
         ///////////////
-
-
-        $scope.generateCouponTemplate = function () {
-            $scope.couponTemplate = couponFactory();
-            $scope.couponTemplate.startDate = new Date;
-            $scope.couponTemplate.endDate = new Date;
-        }
         $scope.types = ["RESTAURANT", "ELECTRICITY", "FOOD", "HEALTH",
             "SPORTS", "CAMPING", "TRAVELLING"];
+        $scope.generateCouponTemplate = function () {
+            $scope.couponTemplate = couponFactory();
+
+            var today = new Date;
+            var todayPlus30 = new Date;
+            todayPlus30.setDate(todayPlus30.getDate()+30);
+
+            $scope.couponTemplate.startDate = today;
+            $scope.couponTemplate.endDate = todayPlus30;
+        }
+
 
 
     });
