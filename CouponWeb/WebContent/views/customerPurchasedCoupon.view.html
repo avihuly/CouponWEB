@@ -1,16 +1,35 @@
-<div class="row">
-    <div class="col-sm-6 col-md-4" ng-repeat="coupon in purchasedCoupons | filter:searchText">
-        <div class="thumbnail">
-            <h3> {{coupon.title}} </h3>
-            <div>
-                <img ng-src={{coupon.image}}
-                     alt={{coupon.title}}
-                     class="img-responsive"
-                     height="{{ couponPicSize.height }}"
-                     width="{{ couponPicSize.width }}"
-                     uib-tooltip={{"Description:"+coupon.message}}>
+<div>
+    <!--navigation-->
+    <div class="row">
+        <!--By Type-->
+        <div class="col-md-6">
+        <select class="form-control"
+                ng-model="typeOnfocus"
+                ng-change="purchasedByType()"
+                ng-options="type for type in couponType">
+            <option value="All" selected>All</option>
+        </select>
+        </div>
+        <!--By Price-->
+        <div class="col-md-6">
 
-                <span class="label label-info info" id="topInfo">
+        </div>
+    </div>
+
+    <!--Coupons-->
+    <div class="row">
+        <div class="col-sm-6 col-md-4" ng-repeat="coupon in purchasedCoupons | filter:searchText">
+            <div class="thumbnail">
+                <h3> {{coupon.title}} </h3>
+                <div>
+                    <img ng-src={{coupon.image}}
+                         alt={{coupon.title}}
+                         class="img-responsive"
+                         height="{{ couponPicSize.height }}"
+                         width="{{ couponPicSize.width }}"
+                         uib-tooltip={{"Description:"+coupon.message}}>
+
+                    <span class="label label-info info" id="topInfo">
                             <span uib-tooltip="Start date"> {{coupon.startDate}}
                                 <b class="glyphicon glyphicon-chevron-left"></b>
                             </span>
@@ -19,9 +38,10 @@
                                 <b class="glyphicon glyphicon-stop"></b>
                             </span>
                     </span>
-                <img/>
+                    <img/>
+                </div>
             </div>
+            <br/>
         </div>
-        <br/>
     </div>
 </div>

@@ -1,7 +1,10 @@
 package com.coupon.services;
 
 import java.beans.PropertyVetoException;
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -20,9 +23,19 @@ public class LoginServlet {
 	
 	private static final String Facade_Attr = "FACADE";
 
-	@Context
-	private HttpServletRequest request;
+	@Context private HttpServletRequest request;
+	@Context private HttpServletResponse response;
 
+	@GET
+	@Path("/logOff")
+	@Produces(MediaType.TEXT_PLAIN)
+	public void logOff () throws IOException { //TODO: Map Exception to repsonse 
+		// getting the facade saved in the session
+		request.getSession().invalidate();
+		response.sendRedirect("http://localhost:8080/CouponWeb/index.html");	
+	}
+	
+	
 	@GET
 	@Path("{name}/{password}/{clientType}")	
 	@Produces(MediaType.TEXT_PLAIN)

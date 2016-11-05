@@ -1,7 +1,7 @@
 angular.module("Coupon")
     .controller("customerController", function
         ($scope, $http, $rootScope, couponUtil,
-         customerCouponProxy) {
+         customerCouponProxy, couponTypesFactory) {
 
         // Coupons model array
         $scope.couponsToBrowse = [];
@@ -10,6 +10,10 @@ angular.module("Coupon")
         $scope.searchText = '';
         // client Type
         $scope.clientType = $rootScope.clientType;
+        // Coupon Types
+        $scope.couponType = couponTypesFactory;
+        // Coupon Types
+        $scope.typeOnfocus = '';
         // sidebar navigation click model
         $scope.sideBarRadioClickModel = "views/customerBrowseCoupons.view.html";
 
@@ -42,6 +46,18 @@ angular.module("Coupon")
                     function successCallback(response) {
                         $scope.purchasedCoupons.push(response.data);
                         logResponse('Purchased coupon:', response);
+                    },
+                    function errorCallback(response) {
+                        logResponse('ERROR:', response);
+                    });
+        };
+        // Purchased by type
+        $scope.purchasedByType = function () {
+            console.log($scope.typeOnfocus);
+            customerCouponProxy.purchasedByType($scope.typeOnfocus)
+                .then(
+                    function successCallback(response) {
+                        $scope.purchasedCoupons = response.data;
                     },
                     function errorCallback(response) {
                         logResponse('ERROR:', response);

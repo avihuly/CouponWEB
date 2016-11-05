@@ -1,7 +1,8 @@
 angular.module("Coupon")
     .controller("companyController", function
         ($scope, $http, $rootScope, couponUtil,
-         loginProxy, companyCouponProxy, couponFactory) {
+         loginProxy, companyCouponProxy, couponFactory,
+         couponTypesFactory) {
 
         // Coupons model array
         $scope.coupons = [];
@@ -85,8 +86,7 @@ angular.module("Coupon")
         //New Coupon //
         ///////////////
         // List of coupon Tyeps
-        $scope.types = ["RESTAURANT", "ELECTRICITY", "FOOD", "HEALTH",
-            "SPORTS", "CAMPING", "TRAVELLING"];
+        $scope.types = couponTypesFactory;
         // When entering new coupon mode a new coupon object is created
         // to hold the new coupon details
         $scope.generateCouponTemplate = function () {
@@ -94,16 +94,15 @@ angular.module("Coupon")
 
             var today = new Date;
             var todayPlus30 = new Date;
-            todayPlus30.setDate(todayPlus30.getDate()+30);
+            todayPlus30.setDate(todayPlus30.getDate() + 30);
 
             $scope.couponTemplate.startDate = today;
             $scope.couponTemplate.endDate = todayPlus30;
         };
         //
-        $scope. imagePathChanged = function () {
+        $scope.imagePathChanged = function () {
             alert(document.getElementById("image"));
         };
-
 
 
     });

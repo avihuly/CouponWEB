@@ -24,18 +24,9 @@ public class AdminServlet {
 	
 	private static final String Facade_Attr = "FACADE";
 
-	@Context
-	private HttpServletRequest request;
-	@Context private HttpServletResponse response;
+	@Context private HttpServletRequest request;
 	
-	@GET
-	@Path("/logOff")
-	@Produces(MediaType.TEXT_PLAIN)
-	public void logOff () throws IOException { //TODO: Map Exception to repsonse 
-		// getting the adminFacade saved in the session
-		request.getSession().invalidate();
-		response.sendRedirect("http://localhost:8080/CouponWeb/index.html");	
-	}
+	
 	
 	//////////////////// *************** /////////////////
 	//////////////////// COMPANY METHODS /////////////////

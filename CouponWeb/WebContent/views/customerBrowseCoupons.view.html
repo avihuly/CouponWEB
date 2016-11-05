@@ -20,10 +20,13 @@
                             </span>
                     </span>
                 <img/>
-                <button class="form-control btn-success" ng-click="buyCoupon(coupon.id)">
+                <label class="form-control">
+                    Price: {{coupon.price}}
+                </label>
+                <button class="form-control btn-success"
+                        ng-click="buyCoupon(coupon.id)">
                     Get coupon
                 </button>
-
             </div>
         </div>
         <br/>
