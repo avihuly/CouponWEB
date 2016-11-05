@@ -3,9 +3,9 @@
  */
 angular.module("Coupon")
     .controller("loginController", function ($scope, $rootScope, $http, $location, loginProxy) {
-        $scope.clientType = "Company";
-        $scope.name = "a";
-        $scope.password = "1";
+        $scope.clientType = "Customer";
+        $scope.name = "0";
+        $scope.password = "0";
         
         $scope.mySubmit = function () {
             loginProxy.login($scope.name, $scope.password, $scope.clientType)

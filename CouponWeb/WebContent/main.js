@@ -12,6 +12,7 @@ app.config(function ($routeProvider) {
         .when("/login", {controller: "loginController", templateUrl:"views/login.view.html"})
         .when("/adminhome", {controller: "adminhomeController", templateUrl:"views/adminhome.view.html"})
         .when("/companyhome", {controller: "companyController", templateUrl:"views/companyhome.view.html"})
+        .when("/customerhome", {controller: "customerController", templateUrl:"views/customerhome.view.html"})
 });
 
 

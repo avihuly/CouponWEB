@@ -54,8 +54,6 @@ angular.module("Coupon")
         };
         // Add coupon
         $scope.addCoupon = function (data) {
-
-
             console.debug($scope.couponTemplate);
             companyCouponProxy.create(data)
                 .then(
@@ -86,8 +84,11 @@ angular.module("Coupon")
         ///////////////
         //New Coupon //
         ///////////////
+        // List of coupon Tyeps
         $scope.types = ["RESTAURANT", "ELECTRICITY", "FOOD", "HEALTH",
             "SPORTS", "CAMPING", "TRAVELLING"];
+        // When entering new coupon mode a new coupon object is created
+        // to hold the new coupon details
         $scope.generateCouponTemplate = function () {
             $scope.couponTemplate = couponFactory();
 
@@ -97,7 +98,11 @@ angular.module("Coupon")
 
             $scope.couponTemplate.startDate = today;
             $scope.couponTemplate.endDate = todayPlus30;
-        }
+        };
+        //
+        $scope. imagePathChanged = function () {
+            alert(document.getElementById("image"));
+        };
 
 
 

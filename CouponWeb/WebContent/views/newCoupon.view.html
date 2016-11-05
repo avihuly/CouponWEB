@@ -74,7 +74,9 @@
         </br>
         <div class="input-group">
         <span class="btn btn-primary btn-file input-group-addon" id="addon">
-            Browse <input ng-model="couponTemplate.image"
+            Browse <input file-model="couponTemplate.image"
+                          accept="image/*"
+                          id="image"
                           type=file
                           class="form-control" class="form-control">
         </span>

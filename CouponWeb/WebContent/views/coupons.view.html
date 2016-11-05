@@ -4,7 +4,7 @@
     </div>
     <br/>
     <div class="row">
-        <div class="col-sm-6 col-md-4" ng-repeat="coupon in focusOn.coupons">
+        <div class="col-sm-6 col-md-4" ng-repeat="coupon in focusOn.coupons | filter:searchText">
             <div class="thumbnail">
                 <h3> {{coupon.title}} </h3>
                 <div>
