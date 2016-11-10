@@ -2,13 +2,12 @@
     <!--navigation-->
     <div class="row">
         <!--By Type-->
-        <div class="col-md-6">
-        <select class="form-control"
-                ng-model="typeOnfocus"
-                ng-change="purchasedByType()"
-                ng-options="type for type in couponType">
-            <option value="All" selected>All</option>
-        </select>
+        <div class="col-md-6 select-style">
+            <select id="typeSelect"
+                    ng-change="purchasedByType()"
+                    ng-model="typeOnfocus"
+                    ng-options="type for type in couponType">
+            </select>
         </div>
         <!--By Price-->
         <div class="col-md-6">
@@ -17,6 +16,9 @@
     </div>
 
     <!--Coupons-->
+    <div class="row">
+        <label> {{noCouponOfTypeLbl}} </label>
+    </div>
     <div class="row">
         <div class="col-sm-6 col-md-4" ng-repeat="coupon in purchasedCoupons | filter:searchText">
             <div class="thumbnail">

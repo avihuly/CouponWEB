@@ -12,24 +12,10 @@ table, td, tr {
     text-align: left;
 }
 
-#top {
-    background-color: #888888;
-}
-
-#logoffBnt {
-    width: 80%;
-    margin-top: 30px;
-}
-
-#logoffDiv {
-    text-align:center;
-}
-
 
 #newCouponView {
     text-align:left;
 }
-
 
 .btn-file {
     position: relative;

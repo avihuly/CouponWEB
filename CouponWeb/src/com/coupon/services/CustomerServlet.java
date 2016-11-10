@@ -50,10 +50,11 @@ public class CustomerServlet {
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Coupon[] getAllPurchasedCouponsByType(String type) {
+		System.out.println(type);
 		// getting the customerFacade saved in the session
 		CustomerFacade custFacade = (CustomerFacade) request.getSession().getAttribute(Facade_Attr);
 		// converting type to enum
-		CouponType couponType = CouponType.valueOf(type);
+		CouponType couponType = CouponType.valueOf(type);		
 		// return result
 		return custFacade.getAllPurchasedCouponsByType(couponType).toArray(new Coupon[]{});
 	}

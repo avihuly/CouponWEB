@@ -8,14 +8,16 @@ angular.module("Coupon")
         $scope.purchasedCoupons = [];
         // Search text
         $scope.searchText = '';
+        // No coupon msg
+        $scope.noCouponOfTypeLbl = '';
         // client Type
         $scope.clientType = $rootScope.clientType;
-        // Coupon Types
-        $scope.couponType = couponTypesFactory;
-        // Coupon Types
-        $scope.typeOnfocus = '';
         // sidebar navigation click model
         $scope.sideBarRadioClickModel = "views/customerBrowseCoupons.view.html";
+        // Coupon Types
+        $scope.couponType = couponTypesFactory;
+        $scope.couponType.push("All");
+        $scope.typeOnfocus = '';
 
         // Browse coupons method
         $scope.browseCoupons = function () {
@@ -33,6 +35,7 @@ angular.module("Coupon")
             customerCouponProxy.purchased()
                 .then(
                     function successCallback(response) {
+                        document.getElementById("typeSelect").selectedIndex = ($scope.couponType.length);
                         $scope.purchasedCoupons = response.data;
                     },
                     function errorCallback(response) {
@@ -53,14 +56,27 @@ angular.module("Coupon")
         };
         // Purchased by type
         $scope.purchasedByType = function () {
-            console.log($scope.typeOnfocus);
-            customerCouponProxy.purchasedByType($scope.typeOnfocus)
-                .then(
-                    function successCallback(response) {
-                        $scope.purchasedCoupons = response.data;
-                    },
-                    function errorCallback(response) {
-                        logResponse('ERROR:', response);
-                    });
+            var index = document.getElementById("typeSelect").selectedIndex;
+            var typeOptions = document.getElementById("typeSelect").options;
+            var selectedType = typeOptions[index].text;
+
+            if (selectedType == "All") {
+                $scope.purchasedCoupon();
+            } else {
+                customerCouponProxy.purchasedByType(selectedType)
+                    .then(
+                        function successCallback(response) {
+                            $scope.purchasedCoupons = response.data;
+                            if ($scope.purchasedCoupons == '') {
+                                $scope.noCouponOfTypeLbl =
+                                    "No coupons of type '" + selectedType + "'";
+                            } else {
+                                $scope.noCouponOfTypeLbl = '';
+                            }
+                        },
+                        function errorCallback(response) {
+                            logResponse('ERROR:', response);
+                        });
+            }
         }
     });
