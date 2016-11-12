@@ -42,6 +42,7 @@ angular.module("Coupon")
                     function successCallback(response) {
                         // Set Type to All
                         document.getElementById("typeSelect").selectedIndex = ($scope.couponType.length);
+                        $scope.couponFilter.upToPrice = null;
                         $scope.purchasedCoupons = response.data;
                     },
                     function errorCallback(response) {
@@ -105,5 +106,5 @@ angular.module("Coupon")
                             logResponse('ERROR:', response);
                         });
             }
-        }
+        };
     });

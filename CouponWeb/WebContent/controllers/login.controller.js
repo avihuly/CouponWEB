@@ -3,7 +3,7 @@
  */
 angular.module("Coupon")
     .controller("loginController", function ($scope, $rootScope, $http, $location, loginProxy) {
-        $scope.clientType = "Customer";
+        $scope.clientType = "Company";
         $scope.name = "0";
         $scope.password = "0";
         

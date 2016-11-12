@@ -2,7 +2,7 @@ angular.module("Coupon")
     .controller("companyController", function
         ($scope, $http, $rootScope, couponUtil,
          loginProxy, companyCouponProxy, couponFactory,
-         couponTypesFactory) {
+         couponTypesFactory, couponFilterFactory) {
 
         // Coupons model array
         $scope.coupons = [];
@@ -10,10 +10,16 @@ angular.module("Coupon")
         $scope.searchText = '';
         // client Type
         $scope.clientType = $rootScope.clientType;
-        // sidebar navigation click model
+        // Sidebar navigation click model
         $scope.sideBarRadioClickModel = "views/companyCoupon.view.html";
+        // Coupon types
+        $scope.couponType = couponTypesFactory;
+        // Filter model
+        $scope.couponFilter = couponFilterFactory();
 
-        // coupon update validation method
+        //////////////////////
+        // Validation method//
+        //////////////////////
         $scope.onberofesaveCouponTitle = function (data) {
             var coupTitle = [];
             for (var i = 0; i < $scope.coupons.length; i++) {
@@ -30,6 +36,7 @@ angular.module("Coupon")
         ////////////
         // Get all coupons
         $scope.getAllCoupons = function () {
+            $scope.couponFilter = couponFilterFactory();
             companyCouponProxy.getAll()
                 .then(
                     function successCallback(response) {
@@ -81,11 +88,93 @@ angular.module("Coupon")
                         logResponse('ERROR:', response);
                     });
         };
+        // Get coupon by type
+        $scope.byType = function () {
+            var index = document.getElementById("typeSelect").selectedIndex;
+            var typeOptions = document.getElementById("typeSelect").options;
+            $scope.couponFilter.typeOnfocus = typeOptions[index].text;
+
+            if ($scope.couponFilter.typeOnfocus == "All") {
+                $scope.getAllCoupons();
+            } else {
+                companyCouponProxy.byType($scope.couponFilter.typeOnfocus)
+                    .then(
+                        function successCallback(response) {
+                            $scope.coupons = response.data;
+                            if ($scope.coupons == '') {
+                                $scope.couponFilter.message =
+                                    "No coupons of type '" + $scope.couponFilter.typeOnfocus + "'";
+                            } else {
+                                $scope.couponFilter.message = '';
+                            }
+                        },
+                        function errorCallback(response) {
+                            logResponse('ERROR:', response);
+                        });
+            }
+        };
+        // Get coupon by price
+        $scope.byPrice = function () {
+            // Set Type to All
+            document.getElementById("typeSelect").selectedIndex = ($scope.couponType.length);
+            // Purchased by price
+            if ($scope.couponFilter.upToPrice != null) {
+                companyCouponProxy.byPrice($scope.couponFilter.upToPrice)
+                    .then(
+                        function successCallback(response) {
+                            $scope.coupons = response.data;
+                            if ($scope.coupons.length == 0) {
+                                $scope.message = 'no coupons in that price range';
+                            } else {
+                                $scope.message = '';
+                            }
+                        },
+                        function errorCallback(response) {
+                            logResponse('ERROR:', response);
+                        });
+            }
+        };
+        // Get coupon by start or end date
+        $scope.ByDate = function () {
+            var date = $scope.couponFilter.date;
+            if (date != null) {
+                if ($scope.couponFilter.dateRadio == "start") {
+                    companyCouponProxy.byStartDate(date)
+                        .then(
+                            function successCallback(response) {
+                                $scope.coupons = response.data;
+                                if ($scope.coupons != '') {
+                                    $scope.couponFilter.message = '';
+                                } else {
+                                    $scope.couponFilter.message = "No coupon in that date range";
+                                }
+                            },
+                            function errorCallback(response) {
+                                logResponse('ERROR:', response);
+                            });
+                } else if ($scope.couponFilter.dateRadio == "end") {
+                    companyCouponProxy.byEndDate(date)
+                        .then(
+                            function successCallback(response) {
+                                $scope.coupons = response.data;
+                                if ($scope.coupons != '') {
+                                    $scope.couponFilter.message = '';
+                                } else {
+                                    $scope.couponFilter.message = "No coupon in that date range";
+                                }
+                            },
+                            function errorCallback(response) {
+                                $scope.couponFilter.message = "No coupon in that date range";
+                                logResponse('ERROR:', response);
+                            });
+                }
+            }
+        };
 
         ///////////////
         //New Coupon //
         ///////////////
-        // List of coupon Tyeps
+        // List of coupon types
         $scope.types = couponTypesFactory;
         // When entering new coupon mode a new coupon object is created
         // to hold the new coupon details
@@ -99,10 +188,8 @@ angular.module("Coupon")
             $scope.couponTemplate.startDate = today;
             $scope.couponTemplate.endDate = todayPlus30;
         };
-        //
+        // TODO: IMAGE UPLOAD
         $scope.imagePathChanged = function () {
             alert(document.getElementById("image"));
         };
-
-
     });

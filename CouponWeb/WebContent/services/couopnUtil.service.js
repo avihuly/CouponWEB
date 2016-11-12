@@ -38,16 +38,14 @@ angular.module("Coupon")
             }
         }
 
-        // Max and Min prices of a given coupon array
-        this.priceRange = function (coupons) {
-            var prices = [];
-            for (var i = 0; i < coupons.length; i++) {
-                prices.push(coupons[i].price);
-            }
-            return {
-                max: Math.max.apply(null, prices),
-                min: Math.min.apply(null, prices)
-            }
+        this.dateToStringFormat = function (date) {
+            var StringFormattedDate =
+                date.getFullYear() +
+                "-" + ("0" + date.getMonth()).slice(-2) +
+                "-" + ("0" + date.getDay()).slice(-2);
+            return StringFormattedDate;
         }
     });
+
+
 

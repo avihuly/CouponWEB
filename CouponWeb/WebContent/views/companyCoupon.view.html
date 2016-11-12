@@ -1,4 +1,77 @@
-<div>
+<!--Filters-->
+<div class="row">
+    <!--Filter By Type-->
+    <div class="col-md-3">
+        <div class="input-group">
+            <span class="input-group-addon" id="Tyoe-addon">Type:</span>
+            <div class="col-md-6 select-style">
+                <select class="form-control"
+                        aria-describedby="Price-addon"
+                        id="typeSelect"
+                        ng-change="byType()"
+                        ng-model="couponFilter.typeOnfocus"
+                        ng-options="type for type in couponFilter.couponTypes">
+                </select>
+            </div>
+        </div>
+    </div>
+    <!--Filter By Price-->
+    <div class="col-md-3">
+        <div class="input-group">
+                <span class="input-group-addon"
+                      id="Price-addon">Up to price:
+                </span>
+            <input type="number"
+                   min="1"
+                   ng-model="couponFilter.upToPrice"
+                   placeholder="Price"
+                   class="form-control"
+                   aria-describedby="Price-addon"/>
+            <span class="input-group-btn">
+                    <button class="btn btn-secondary"
+                            type="button"
+                            ng-click="byPrice()">Go!
+                    </button>
+                </span>
+        </div>
+    </div>
+    <!--Filter By Date-->
+    <div class="col-md-3">
+        <div class="input-group">
+                <span class="input-group-addon"
+                      id="date-addon">Up to date:
+                </span>
+            <span class="input-group-addon">
+            <input type="radio"
+                   ng-model="couponFilter.dateRadio"
+                   aria-label="Radio button for following text input"
+                   name="startEndRadio"
+                   value="start"/> Start
+            <input type="radio"
+                   ng-model="couponFilter.dateRadio"
+                   aria-label="Radio button for following text input"
+                   name="startEndRadio"
+                   value="end"/> End
+            </span>
+            <input type="date"
+                   ng-model="couponFilter.date"
+                   class="form-control"
+                   aria-describedby="date-addon"/>
+            <span class="input-group-btn">
+                    <button class="btn btn-secondary"
+                            type="button"
+                            ng-click="ByDate()">Go!
+                    </button>
+                </span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <h2> {{couponFilter.message}} </h2>
+</div>
+
+<!--Coupon Table-->
+<div class="row">
     <table class="table table-responsive table-hover table-condensed">
         <thead>
         <tr style="font-weight: bold">
@@ -21,10 +94,10 @@
             <!--end date-->
             <td>
                 <span editable-text="coupon.endDate"
-                          e-name="endDate"
-                          e-form="couponform"
-                          e-placeholder="coupon end date"
-                          onbeforesave="onberofesaveEndDate($data)">
+                      e-name="endDate"
+                      e-form="couponform"
+                      e-placeholder="coupon end date"
+                      onbeforesave="onberofesaveEndDate($data)">
                             {{coupon.endDate}}
                 </span>
             </td>

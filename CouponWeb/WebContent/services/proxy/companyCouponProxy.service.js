@@ -1,12 +1,10 @@
 angular.module("Coupon")
-    .service('companyCouponProxy', function ($http, couponFactory) {
+    .service('companyCouponProxy', function ($http, couponFactory, couponUtil) {
         var baseUrl = "coupon/company";
-
 
         this.getAll = function () {
             return $http.get(baseUrl + "/getAllCoupons");
-        }
-
+        };
         this.create = function (coupon) {
             coupon.startDate =
                 coupon.startDate.getFullYear() +
@@ -22,9 +20,8 @@ angular.module("Coupon")
                 url: baseUrl + "/createCoupon",
                 headers: {'Content-Type': 'application/json'},
                 data: coupon
-            })
-        }
-
+            });
+        };
         this.update = function (id, coupon) {
             // server needs a full coupon object
             var couponToUpdate = couponFactory();
@@ -38,8 +35,7 @@ angular.module("Coupon")
                 headers: {'Content-Type': 'application/json'},
                 data: couponToUpdate
             })
-        }
-
+        };
         this.remove = function (id) {
             return $http({
                 method: 'Delete',
@@ -47,54 +43,41 @@ angular.module("Coupon")
                 headers: {'Content-Type': 'text/plain'},
                 data: id
             });
-        }
+        };
 
-        this.getCouponByID = function (id) {
-            return $http({
-                method: 'POST',
-                url: baseUrl + "/getCoupon",
-                headers: {'Content-Type': 'text/plain'},
-                data: id
-            });
-        }
-
-        //TODO: not sure I did it right
-        this.getCouponsByType = function (type) {
+        this.byType = function (type) {
             return $http({
                 method: 'POST',
                 url: baseUrl + "/getCouponByType",
                 headers: {'Content-Type': 'text/plain'},
                 data: type
             });
-        }
-
-      //TODO: not sure I did it right
-       this.getCouponByPrice = function (price) {
+        };
+        this.byPrice = function (price) {
             return $http({
                 method: 'POST',
                 url: baseUrl + "/getCouponByPrice",
                 headers: {'Content-Type': 'text/plain'},
                 data: price
             });
-        }
-
-      //TODO: not sure I did it right
-       this.getCouponStartDate = function (date) {
+        };
+        this.byStartDate = function (date) {
+            //format date to dd-mm-yyyy
+            date = couponUtil.dateToStringFormat(date);
             return $http({
                 method: 'POST',
-                url: baseUrl + "/getCouponStartDate",
+                url: baseUrl + "/getCouponByStartDate",
                 headers: {'Content-Type': 'text/plain'},
                 data: date
             });
-        }
-
-     //TODO: not sure I did it right
-       this.getCouponEndDate = function (date) {
+        };
+        this.byEndDate = function (date) {
+            date = couponUtil.dateToStringFormat(date);
             return $http({
                 method: 'POST',
-                url: baseUrl + "/getCouponEndtDate",
+                url: baseUrl + "/getCouponByEndDate",
                 headers: {'Content-Type': 'text/plain'},
                 data: date
             });
-        }
+        };
     });
