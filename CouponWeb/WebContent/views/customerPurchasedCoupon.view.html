@@ -4,14 +4,14 @@
         <!--Filter By Type-->
         <div class="col-md-4">
             <div class="input-group">
-                <span class="input-group-addon" id="Tyoe-addon">Type:</span>
+                <span class="input-group-addon" id="type-addon">Type:</span>
                 <div class="col-md-6 select-style">
                     <select class="form-control"
-                            aria-describedby="Price-addon"
+                            aria-describedby="type-addon"
                             id="typeSelect"
-                            ng-change="purchasedByType()"
-                            ng-model="typeOnfocus"
-                            ng-options="type for type in couponType">
+                            ng-model="couponFilter.typeOnfocus"
+                            ng-options="type for type in couponFilter.couponTypes"
+                            ng-change="purchasedByType()">
                     </select>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                 </span>
                 <input type="number"
                        min="1"
-                       ng-model="couponFilter.upToPrice"
+                       ng-model="couponFilter.price"
                        placeholder="Price"
                        class="form-control"
                        aria-describedby="Price-addon"/>
@@ -38,7 +38,7 @@
         </div>
     </div>
     <div class="row">
-        <label> {{message}} </label>
+        <h2> {{couponFilter.message}} </h2>
     </div>
 
     <!--Coupons-->

@@ -90,10 +90,6 @@ angular.module("Coupon")
         };
         // Get coupon by type
         $scope.byType = function () {
-            var index = document.getElementById("typeSelect").selectedIndex;
-            var typeOptions = document.getElementById("typeSelect").options;
-            $scope.couponFilter.typeOnfocus = typeOptions[index].text;
-
             if ($scope.couponFilter.typeOnfocus == "All") {
                 $scope.getAllCoupons();
             } else {
