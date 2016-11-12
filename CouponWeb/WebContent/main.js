@@ -1,7 +1,7 @@
 /**
  * Created by Avi on 03/09/2016.
  */
-var app = angular.module("Coupon", ['ngRoute', 'xeditable', 'ui.bootstrap']);
+var app = angular.module("Coupon", ['ngRoute', 'ui.bootstrap', 'xeditable']);
 
 // this method will be acscuted before components (Ctrl's) are loaded
 app.config(function ($routeProvider) {

@@ -28,4 +28,12 @@ angular.module("Coupon")
             });
         };
 
+        this.purchasedByPrice = function (price) {
+            return $http({
+                method: 'POST',
+                url: baseUrl + "/purchasedByPrice",
+                headers: {'Content-Type': 'text/plain'},
+                data: price
+            });
+        };
     });

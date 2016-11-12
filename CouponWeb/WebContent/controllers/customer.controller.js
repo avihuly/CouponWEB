@@ -9,7 +9,7 @@ angular.module("Coupon")
         // Search text
         $scope.searchText = '';
         // No coupon msg
-        $scope.noCouponOfTypeLbl = '';
+        $scope.message = '';
         // client Type
         $scope.clientType = $rootScope.clientType;
         // sidebar navigation click model
@@ -18,7 +18,12 @@ angular.module("Coupon")
         $scope.couponType = couponTypesFactory;
         $scope.couponType.push("All");
         $scope.typeOnfocus = '';
+        // for coupons by price
+        $scope.couponFilter = {upToPrice: null};
 
+        ///////////
+        // Method//
+        ///////////
         // Browse coupons method
         $scope.browseCoupons = function () {
             customerCouponProxy.browse()
@@ -35,6 +40,7 @@ angular.module("Coupon")
             customerCouponProxy.purchased()
                 .then(
                     function successCallback(response) {
+                        // Set Type to All
                         document.getElementById("typeSelect").selectedIndex = ($scope.couponType.length);
                         $scope.purchasedCoupons = response.data;
                     },
@@ -68,10 +74,31 @@ angular.module("Coupon")
                         function successCallback(response) {
                             $scope.purchasedCoupons = response.data;
                             if ($scope.purchasedCoupons == '') {
-                                $scope.noCouponOfTypeLbl =
+                                $scope.message =
                                     "No coupons of type '" + selectedType + "'";
                             } else {
-                                $scope.noCouponOfTypeLbl = '';
+                                $scope.message = '';
+                            }
+                        },
+                        function errorCallback(response) {
+                            logResponse('ERROR:', response);
+                        });
+            }
+        };
+        // Purchased by price
+        $scope.purchasedByPrice = function () {
+            // Set Type to All
+            document.getElementById("typeSelect").selectedIndex = ($scope.couponType.length);
+            // Purchased by price
+            if ($scope.couponFilter.upToPrice != null) {
+                customerCouponProxy.purchasedByPrice($scope.couponFilter.upToPrice)
+                    .then(
+                        function successCallback(response) {
+                            $scope.purchasedCoupons = response.data;
+                            if ($scope.purchasedCoupons.length == 0) {
+                                $scope.message = 'no coupons in that price range';
+                            } else {
+                                $scope.message = '';
                             }
                         },
                         function errorCallback(response) {
