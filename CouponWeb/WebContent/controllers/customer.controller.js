@@ -27,7 +27,7 @@ angular.module("Coupon")
                         $scope.couponsToBrowse = response.data;
                     },
                     function errorCallback(response) {
-                        logResponse('ERROR:', response);
+                        couponUtil.handleBadResponse('ERROR:', response);
                     });
         };
         // Customer(my) coupons method
@@ -40,7 +40,7 @@ angular.module("Coupon")
                         $scope.purchasedCoupons = response.data;
                     },
                     function errorCallback(response) {
-                        logResponse('ERROR:', response);
+                        couponUtil.handleBadResponse('ERROR:', response);
                     });
         };
         // Buy coupon method
@@ -49,10 +49,10 @@ angular.module("Coupon")
                 .then(
                     function successCallback(response) {
                         $scope.purchasedCoupons.push(response.data);
-                        logResponse('Purchased coupon:', response);
+                        couponUtil.handleBadResponse('Purchased coupon:', response);
                     },
                     function errorCallback(response) {
-                        logResponse('ERROR:', response);
+                        couponUtil.handleBadResponse('ERROR:', response);
                     });
         };
         // Purchased by type
@@ -72,7 +72,7 @@ angular.module("Coupon")
                             }
                         },
                         function errorCallback(response) {
-                            logResponse('ERROR:', response);
+                            couponUtil.handleBadResponse('ERROR:', response);
                         });
             }
         };
@@ -93,7 +93,7 @@ angular.module("Coupon")
                             }
                         },
                         function errorCallback(response) {
-                            logResponse('ERROR:', response);
+                            couponUtil.handleBadResponse('ERROR:', response);
                         });
             }
         };

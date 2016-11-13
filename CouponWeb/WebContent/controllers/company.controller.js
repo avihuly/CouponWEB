@@ -43,7 +43,7 @@ angular.module("Coupon")
                         $scope.coupons = response.data;
                     },
                     function errorCallback(response) {
-                        logResponse('ERROR:', response);
+                        couponUtil.handleBadResponse('ERROR:', response);
                     });
         };
         // Remove coupon
@@ -57,7 +57,7 @@ angular.module("Coupon")
                         $scope.coupons.splice(index, 1);
                     },
                     function errorCallback(response) {
-                        logResponse('ERROR:', response);
+                        couponUtil.handleBadResponse('ERROR:', response);
                     });
         };
         // Add coupon
@@ -66,12 +66,12 @@ angular.module("Coupon")
             companyCouponProxy.create(data)
                 .then(
                     function successCallback(response) {
-                        logResponse('New coupon added to DB:', response);
+                        couponUtil.handleBadResponse('New coupon added to DB:', response);
                         // update model
                         $scope.coupons.push(response.data);
                     },
                     function errorCallback(response) {
-                        logResponse('ERROR:', response);
+                        couponUtil.handleBadResponse('ERROR:', response);
                     });
         };
         // Update coupon
@@ -80,12 +80,12 @@ angular.module("Coupon")
             companyCouponProxy.update($scope.coupons[index].id, data)
                 .then(
                     function successCallback(response) {
-                        logResponse('Coupon updated', response);
+                        couponUtil.handleBadResponse('Coupon updated', response);
                         // update model
                         $scope.coupons[index] = response.data;
                     },
                     function errorCallback(response) {
-                        logResponse('ERROR:', response);
+                        couponUtil.handleBadResponse('ERROR:', response);
                     });
         };
         // Get coupon by type
@@ -105,7 +105,7 @@ angular.module("Coupon")
                             }
                         },
                         function errorCallback(response) {
-                            logResponse('ERROR:', response);
+                            couponUtil.handleBadResponse('ERROR:', response);
                         });
             }
         };
@@ -126,7 +126,7 @@ angular.module("Coupon")
                             }
                         },
                         function errorCallback(response) {
-                            logResponse('ERROR:', response);
+                            couponUtil.handleBadResponse('ERROR:', response);
                         });
             }
         };
@@ -146,7 +146,7 @@ angular.module("Coupon")
                                 }
                             },
                             function errorCallback(response) {
-                                logResponse('ERROR:', response);
+                                couponUtil.handleBadResponse('ERROR:', response);
                             });
                 } else if ($scope.couponFilter.dateRadio == "end") {
                     companyCouponProxy.byEndDate(date)
@@ -161,7 +161,7 @@ angular.module("Coupon")
                             },
                             function errorCallback(response) {
                                 $scope.couponFilter.message = "No coupon in that date range";
-                                logResponse('ERROR:', response);
+                                couponUtil.handleBadResponse('ERROR:', response);
                             });
                 }
             }

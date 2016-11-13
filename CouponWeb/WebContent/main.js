@@ -15,20 +15,12 @@ app.config(function ($routeProvider) {
         .when("/customerhome", {controller: "customerController", templateUrl:"views/customerhome.view.html"})
 });
 
-
 // this method will be acscuted after components (Ctrl) are loaded
 app.run(function (editableOptions) {
     console.log("run web app");
     editableOptions.theme = 'bs3';
 });
 
-
-// Util methods
-// TODO: move to a new logservice
-function logResponse(message, response) {
-    console.log(message);
-    console.log(response.data);
-}
 
 
 

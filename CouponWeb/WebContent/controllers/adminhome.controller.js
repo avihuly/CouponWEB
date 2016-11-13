@@ -53,7 +53,7 @@ angular.module("Coupon")
                         $scope.companies = response.data;
                     },
                     function errorCallback(response) {
-                        logResponse('ERROR:', response);
+                        couponUtil.handleBadResponse('ERROR:', response);
                     });
         };
 
@@ -69,7 +69,7 @@ angular.module("Coupon")
                             $scope.companies.splice(index, 1);
                         },
                         function errorCallback(response) {
-                            logResponse('ERROR:', response);
+                            couponUtil.handleBadResponse('ERROR:', response);
                         });
             } else {
                 $scope.companies.splice(index, 1);
@@ -83,23 +83,23 @@ angular.module("Coupon")
                 companyProxy.create(data)
                     .then(
                         function successCallback(response) {
-                            logResponse('New company added to DB:', response);
+                            couponUtil.handleBadResponse('New company added to DB:', response);
                             // update model
                             $scope.companies[index] = response.data;
                         },
                         function errorCallback(response) {
-                            logResponse('ERROR:', response);
+                            couponUtil.handleBadResponse('ERROR:', response);
                         });
             } else {
                 // Update company in DB
                 companyProxy.update($scope.companies[index].id, data).then(
                     function successCallback(response) {
-                        logResponse('Company updated', response);
+                        couponUtil.handleBadResponse('Company updated', response);
                         // update model
                         $scope.companies[index] = response.data;
                     },
                     function errorCallback(response) {
-                        logResponse('ERROR:', response);
+                        couponUtil.handleBadResponse('ERROR:', response);
                     });
             }
         };
@@ -114,7 +114,7 @@ angular.module("Coupon")
                         $scope.sideBarRadioClickModel = "views/coupons.view.html"
                     },
                     function errorCallback(response) {
-                        logResponse('ERROR:', response);
+                        couponUtil.handleBadResponse('ERROR:', response);
                     });
         };
 
@@ -135,7 +135,7 @@ angular.module("Coupon")
                         $scope.customers = response.data;
                     },
                     function errorCallback(response) {
-                        logResponse('ERROR:', response);
+                        couponUtil.handleBadResponse('ERROR:', response);
                     });
         };
 
@@ -151,7 +151,7 @@ angular.module("Coupon")
                             $scope.customers.splice(index, 1);
                         },
                         function errorCallback(response) {
-                            logResponse('ERROR:', response);
+                            couponUtil.handleBadResponse('ERROR:', response);
                         });
             } else {
                 $scope.customers.splice(index, 1);
@@ -164,23 +164,23 @@ angular.module("Coupon")
                 // Add new company to db
                 customerProxy.create(data).then(
                     function successCallback(response) {
-                        logResponse('New company added to DB:', response);
+                        couponUtil.handleBadResponse('New company added to DB:', response);
                         // update model
                         $scope.customers[index] = response.data;
                     },
                     function errorCallback(response) {
-                        logResponse('ERROR:', response);
+                        couponUtil.handleBadResponse('ERROR:', response);
                     });
             } else {
                 // Update customer in DB
                 customerProxy.update($scope.customers[index].id, data).then(
                     function successCallback(response) {
-                        logResponse('Company updated', response);
+                        couponUtil.handleBadResponse('Company updated', response);
                         // update model
                         $scope.customers[index] = response.data;
                     },
                     function errorCallback(response) {
-                        logResponse('ERROR:', response);
+                        couponUtil.handleBadResponse('ERROR:', response);
                     });
             }
         };
@@ -195,7 +195,7 @@ angular.module("Coupon")
                         $scope.sideBarRadioClickModel = "views/coupons.view.html"
                     },
                     function errorCallback(response) {
-                        logResponse('ERROR:', response);
+                        couponUtil.handleBadResponse('ERROR:', response);
                     });
         };
 

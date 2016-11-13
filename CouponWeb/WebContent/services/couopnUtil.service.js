@@ -1,5 +1,5 @@
 angular.module("Coupon")
-    .service('couponUtil', function () {
+    .service('couponUtil', function ($location) {
         // password validation
         this.passwordValidation = function (password) {
             var pattern = /(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,10}/g;
@@ -44,6 +44,17 @@ angular.module("Coupon")
                 "-" + ("0" + date.getMonth()).slice(-2) +
                 "-" + ("0" + date.getDay()).slice(-2);
             return StringFormattedDate;
+        }
+
+        this.handleBadResponse = function (message, response) {
+            // Check for null session and redirect to login page
+            var data = response.data;
+            if (data.errorCode == 900){
+                $location.path("/login").replace();
+            }
+            // log response
+            console.log(message);
+            console.log(data);
         }
     });
 
