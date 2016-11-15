@@ -16,6 +16,8 @@ angular.module("Coupon")
         $scope.couponType = couponTypesFactory;
         // Filter model
         $scope.couponFilter = couponFilterFactory();
+        // List of coupon types
+        $scope.types = couponTypesFactory;
 
         //////////////////////
         // Validation method//
@@ -62,17 +64,30 @@ angular.module("Coupon")
         };
         // Add coupon
         $scope.addCoupon = function (data) {
+
             console.debug($scope.couponTemplate);
-            companyCouponProxy.create(data)
-                .then(
-                    function successCallback(response) {
-                        couponUtil.handleBadResponse('New coupon added to DB:', response);
-                        // update model
-                        $scope.coupons.push(response.data);
-                    },
-                    function errorCallback(response) {
-                        couponUtil.handleBadResponse('ERROR:', response);
-                    });
+            var img = document.getElementById("couponImage");
+
+            getBase64(img.files[0], function(imageBase64){
+
+                data.image = imageBase64;
+
+                companyCouponProxy.create(data)
+                    .then(
+                        function successCallback(response) {
+                            couponUtil.handleBadResponse('New coupon added to DB:', response);
+                            // update model
+                            $scope.coupons.push(response.data);
+                        },
+                        function errorCallback(response) {
+                            couponUtil.handleBadResponse('ERROR:', response);
+                        });
+                },
+                function(getBase64Error){
+                    console.error(getBase64Error);
+                }
+            );
+
         };
         // Update coupon
         $scope.updateCoupon = function (data, index) {
@@ -170,8 +185,6 @@ angular.module("Coupon")
         ///////////////
         //New Coupon //
         ///////////////
-        // List of coupon types
-        $scope.types = couponTypesFactory;
         // When entering new coupon mode a new coupon object is created
         // to hold the new coupon details
         $scope.generateCouponTemplate = function () {
@@ -188,4 +201,16 @@ angular.module("Coupon")
         $scope.imagePathChanged = function () {
             alert(document.getElementById("image"));
         };
+
+
+        function getBase64(file, successCb, errorCb) {
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+                successCb(reader.result);
+            };
+            reader.onerror = function (error) {
+                errorCb(error);
+            };
+        }
     });

@@ -70,21 +70,10 @@
     <!--Image-->
     <div class="form-group">
         <label>Image</label>
-        </br>
-        <div class="input-group">
-        <span class="btn btn-primary btn-file input-group-addon" id="addon">
-            Browse <input file-model="couponTemplate.image"
-                          accept="image/*"
-                          id="image"
-                          type=file
-                          class="form-control" class="form-control">
-        </span>
-            <input ng-model="couponTemplate.image"
-                   type=text
-                   class="form-control"
-                   aria-describedby="addon"
-                   placeholder="Image">
-        </div>
+        <input accept="image/*"
+               id="couponImage"
+               type=file
+               class="form-control">
     </div>
 
     <button class="btn btn-default" ng-click="addCoupon(couponTemplate)">Submit</button>
