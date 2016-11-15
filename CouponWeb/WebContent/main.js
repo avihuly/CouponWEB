@@ -13,6 +13,7 @@ app.config(function ($routeProvider) {
         .when("/adminhome", {controller: "adminhomeController", templateUrl:"views/adminhome.view.html"})
         .when("/companyhome", {controller: "companyController", templateUrl:"views/companyhome.view.html"})
         .when("/customerhome", {controller: "customerController", templateUrl:"views/customerhome.view.html"})
+        .when("/500", {templateUrl:"views/500.html"})
 });
 
 // this method will be acscuted after components (Ctrl) are loaded

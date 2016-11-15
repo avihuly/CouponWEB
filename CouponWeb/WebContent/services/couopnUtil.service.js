@@ -12,7 +12,7 @@ angular.module("Coupon")
                     + "At lest one lower case letter\n"
                     + "At lest one digit";
             }
-        }
+        };
 
         // return false if user name exsist
         this.nameValidation = function (name, names) {
@@ -23,7 +23,7 @@ angular.module("Coupon")
             } else {
                 return true;
             }
-        }
+        };
 
         // return false if date is not in the correct format
         this.dateValidation = function (date) {
@@ -36,7 +36,7 @@ angular.module("Coupon")
             } else {
                 return true;
             }
-        }
+        };
 
         this.dateToStringFormat = function (date) {
             var StringFormattedDate =
@@ -44,17 +44,25 @@ angular.module("Coupon")
                 "-" + ("0" + date.getMonth()).slice(-2) +
                 "-" + ("0" + date.getDay()).slice(-2);
             return StringFormattedDate;
-        }
+        };
 
         this.handleBadResponse = function (message, response) {
             // Check for null session and redirect to login page
             var data = response.data;
-            if (data.errorCode == 900){
+
+            if(data.errorCode == 900){
                 $location.path("/login").replace();
             }
+            if(400 <= response.status && response.status < 500){
+                alert(data.errorMessage);
+            }
+            else if(500 <= response.status && response.status < 600){
+                $location.path("/500").replace();
+            }
+
             // log response
-            console.log(message);
-            console.log(data);
+            console.error(message);
+            console.error(data);
         }
     });
 

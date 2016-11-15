@@ -43,8 +43,6 @@ public class LoginServlet {
 			@PathParam("name") String name, 
 			@PathParam("password") String password,
 			@PathParam("clientType") String clientTypeTxt) throws PropertyVetoException {
-		
-	
 		// Converting client type to enum
 		ClientType clientType = ClientType.valueOf(clientTypeTxt);
 		// Checking for
