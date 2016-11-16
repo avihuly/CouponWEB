@@ -35,7 +35,6 @@ public class LoginServlet {
 		response.sendRedirect("http://localhost:8080/CouponWeb/index.html");	
 	}
 	
-	
 	@GET
 	@Path("{name}/{password}/{clientType}")	
 	@Produces(MediaType.TEXT_PLAIN)

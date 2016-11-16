@@ -1,0 +1,36 @@
+<div class="container">
+    <h1> Coupon Web </h1>
+    <h3> Welcome to our magnificent coupon web app! </h3>
+    <form>
+        <table>
+            <tr>
+                <td>
+                    <div class="input-group">
+                        <span class="input-group-addon" id="userAddon">
+                            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        </span>
+                        <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+                    </div>
+                </td>
+                <td><input type="text" name="name" ng-model="name" placeholder="username"/></td>
+            </tr>
+            <tr>
+                <td> Password:</td>
+                <td><input type="password" name="password" ng-model="password" placeholder="password"/></td>
+            </tr>
+        </table>
+
+        <br/>
+
+        <input type="radio" name="clientType" value="Admin" ng-model="clientType"/> Admin
+        <input type="radio" name="clientType" value="Company" ng-model="clientType"/> Company
+        <input type="radio" name="clientType" value="Customer" ng-model="clientType"/> Customer
+
+        <br/>
+        <br/>
+
+        <p name="loginStatus"> {{loginStatus}} </p>
+        <button type="button" class="btn btn-success" ng-click="mySubmit()"> Login</button>
+    </form>
+
+</div>
