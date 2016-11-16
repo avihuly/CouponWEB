@@ -61,7 +61,6 @@ public class CompanyServlet {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Coupon updateCoupon(Coupon coupon){
 		//getting the companyFacade saved in the session
-		System.out.println(coupon);
 		CompanyFacade compFacade = (CompanyFacade) request.getSession().getAttribute(Facade_Attr);		
 		//the updateCoupon function
 		compFacade.updateCoupon(coupon);

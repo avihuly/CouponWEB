@@ -18,7 +18,6 @@ public class ErrorCode {
 	public static final String COUPON_TITLE_EXISTS	 		= "406-12";
 	public static final String ENUM_DOES_NOT_EXISTS	 		= "406-13";
 	
-	
 	// 500
 	public static final String UNEXPECTED 					= "500-0";
 	public static final String ADMIN_UNEXPECTED 			= "500-1";

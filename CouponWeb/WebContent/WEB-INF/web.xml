@@ -60,7 +60,4 @@
     	<url-pattern>/coupon/customer/*</url-pattern>
     	<url-pattern>/coupon/customer</url-pattern>
 	</filter-mapping>
-
-
-
 </web-app>

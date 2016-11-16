@@ -38,6 +38,29 @@ angular.module("Coupon")
             }
         };
 
+        // return false if price is illegal
+        this.PriceValidation = function (data) {
+            if (isNaN(data)) {
+                return "Price must be a number";
+            } else if (data < 0) {
+                return "Price must be a positive number";
+            } else {
+                return true;
+            }
+        };
+
+        // Check for null values in couponTemplate
+        this.newCouponValidation = function (data) {
+            var validCoupon = true;
+            angular.forEach(data, function (value, key) {
+                if (value == null) {
+                    validCoupon = false;
+                }
+            })
+            return validCoupon;
+        }
+
+        // returns date in string format that the server can handel
         this.dateToStringFormat = function (date) {
             var StringFormattedDate =
                 date.getFullYear() +
@@ -46,24 +69,27 @@ angular.module("Coupon")
             return StringFormattedDate;
         };
 
+        // handel bad response from server
         this.handleBadResponse = function (message, response) {
             // Check for null session and redirect to login page
             var data = response.data;
 
-            if(data.errorCode == 900){
+            if (data.errorCode == 900) {
                 $location.path("/login").replace();
             }
-            if(400 <= response.status && response.status < 500){
+            if (400 <= response.status && response.status < 500) {
                 alert(data.errorMessage);
             }
-            else if(500 <= response.status && response.status < 600){
+            else if (500 <= response.status && response.status < 600) {
                 $location.path("/500").replace();
             }
 
             // log response
             console.error(message);
             console.error(data);
-        }
+        };
+
+
     });
 
 

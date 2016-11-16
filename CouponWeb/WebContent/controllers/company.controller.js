@@ -31,6 +31,9 @@ angular.module("Coupon")
         };
         $scope.onberofesaveEndDate = function (data) {
             return couponUtil.dateValidation(data);
+        };
+        $scope.onberofesavePrice = function (data) {
+            return couponUtil.PriceValidation(data);
         }
 
         ////////////
@@ -64,30 +67,33 @@ angular.module("Coupon")
         };
         // Add coupon
         $scope.addCoupon = function (data) {
-
-            console.debug($scope.couponTemplate);
-            var img = document.getElementById("couponImage");
-
-            getBase64(img.files[0], function(imageBase64){
-
-                data.image = imageBase64;
-
-                companyCouponProxy.create(data)
-                    .then(
-                        function successCallback(response) {
-                            alert("New coupon was Added to DB");
-                            // update model
-                            $scope.coupons.push(response.data);
-                            $scope.sideBarRadioClickModel = "views/companyCoupon.view.html";
-                        },
-                        function errorCallback(response) {
-                            couponUtil.handleBadResponse('ERROR:', response);
-                        });
-                },
-                function(getBase64Error){
-                    console.error(getBase64Error);
-                }
-            );
+            // checks if there are null fields in coupon template
+            if (couponUtil.newCouponValidation(data)) {
+                console.debug($scope.couponTemplate);
+                var img = document.getElementById("couponImage");
+                // convert image to base64
+                getBase64(img.files[0], function (imageBase64) {
+                        data.image = imageBase64;
+                        // if all checks out make a call to the server
+                        companyCouponProxy.create(data)
+                            .then(
+                                function successCallback(response) {
+                                    alert("New coupon was Added to DB");
+                                    // update model
+                                    $scope.coupons.push(response.data);
+                                    $scope.sideBarRadioClickModel = "views/companyCoupon.view.html";
+                                },
+                                function errorCallback(response) {
+                                    couponUtil.handleBadResponse('ERROR:', response);
+                                });
+                    },
+                    function (getBase64Error) {
+                        console.error(getBase64Error);
+                    }
+                );
+            } else {
+                alert("please make sure all fields are filled")
+            }
 
         };
         // Update coupon

@@ -22,11 +22,12 @@ public class LoginFilter implements Filter {
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 
 		if (httpRequest.getSession(false) == null) {
-			ServletOutputStream out = response.getOutputStream();
 			// Set response status to bad
 			httpResponse.setStatus(400);
 			// return null session json
 			response.setContentType(MediaType.APPLICATION_JSON);
+			// Write to body
+			ServletOutputStream out = response.getOutputStream();
 			out.println("{"
 					+ "\"errorMessag\":\"null session\","
 					+ " \"errorCode\": 900"

@@ -50,7 +50,6 @@ public class CustomerServlet {
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Coupon[] getAllPurchasedCouponsByType(String type) {
-		System.out.println(type);
 		// getting the customerFacade saved in the session
 		CustomerFacade custFacade = (CustomerFacade) request.getSession().getAttribute(Facade_Attr);
 		// converting type to enum
