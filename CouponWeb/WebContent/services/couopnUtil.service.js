@@ -53,12 +53,12 @@ angular.module("Coupon")
         this.newCouponValidation = function (data) {
             var validCoupon = true;
             angular.forEach(data, function (value, key) {
-                if (value == null) {
+                if (value == null && key != "id") {
                     validCoupon = false;
                 }
             })
             return validCoupon;
-        }
+        };
 
         // returns date in string format that the server can handel
         this.dateToStringFormat = function (date) {
@@ -88,8 +88,6 @@ angular.module("Coupon")
             console.error(message);
             console.error(data);
         };
-
-
     });
 
 
