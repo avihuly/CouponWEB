@@ -17,17 +17,15 @@ angular.module("Coupon")
         // sidebar navigation click model
         $scope.sideBarRadioClickModel = "views/adminCompany.view.html";
 
-        // password validation method //TODO: ask danny if to move and how?
+        //////////////////////
+        // Validation method//
+        //////////////////////
         $scope.onberofesavePASSWORD = function (data) {
             return couponUtil.passwordValidation(data);
         };
-
-        // company validation method
         $scope.onberofesaveCompanyName = function (name) {
-            return couponUtil.nameValidation(name, $scope.companies);
+            return couponUtil.nameValidation(name);
         };
-
-        // customer validation method
         $scope.onberofesaveCustomerName = function (data) {
             var names = [];
             for (var i = 0; i < $scope.customers.length; i++) {
@@ -59,7 +57,9 @@ angular.module("Coupon")
 
         // Remove company
         $scope.removeCompany = function (index) {
-            if ($scope.companies[index].id == !null) {
+            alert("B4 if null");
+            if ($scope.companies[index].id != null) {
+                alert("NOT null");
                 companyProxy.remove($scope.companies[index].id)
                     .then(
                         function successCallback(response) {
@@ -141,7 +141,7 @@ angular.module("Coupon")
 
         // Remove customer
         $scope.removeCustomer = function (index) {
-            if ($scope.customers[index].id == !null) {
+            if ($scope.customers[index].id != null) {
                 customerProxy.remove($scope.customers[index].id)
                     .then(
                         function successCallback(response) {

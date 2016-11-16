@@ -15,11 +15,9 @@ angular.module("Coupon")
         };
 
         // return false if user name exsist
-        this.nameValidation = function (name, names) {
-            if (names.length < 1) {
+        this.nameValidation = function (name) {
+            if (name.length < 1) {
                 return "User name can't be empty";
-            } else if (names.indexOf(name) > -1) {
-                return "User name already exist";
             } else {
                 return true;
             }
@@ -85,8 +83,8 @@ angular.module("Coupon")
             }
 
             // log response
-            console.error(message);
-            console.error(data);
+            console.log(message);
+            console.log(data);
         };
     });
 
