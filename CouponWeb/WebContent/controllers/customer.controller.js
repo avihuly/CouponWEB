@@ -11,10 +11,14 @@ angular.module("Coupon")
         $scope.searchText = '';
         // client Type
         $scope.clientType = $rootScope.clientType;
-        // sidebar navigation click model
+        // sidebar navigation click model default is BrowseCoupons view
         $scope.sideBarRadioClickModel = "views/customerBrowseCoupons.view.html";
         // Coupon filter model
         $scope.couponFilter = couponFilterFactory();
+        // Clear Search Text
+        $scope.ClearSearchText = function () {
+            $scope.searchText = '';
+        };
 
         ///////////////////
         // Coupon Methods//
@@ -30,6 +34,7 @@ angular.module("Coupon")
                         couponUtil.handleBadResponse('ERROR:', response);
                     });
         };
+        $scope.browseCoupons(); // loading browse coupons on page startup
         // Customer(my) coupons method
         $scope.purchasedCoupon = function () {
             $scope.couponFilter = couponFilterFactory();

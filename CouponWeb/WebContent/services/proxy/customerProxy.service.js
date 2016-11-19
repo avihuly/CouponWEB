@@ -1,11 +1,11 @@
+// customer proxy handels all server calls for customer objects manipulation
 angular.module("Coupon")
     .service('customerProxy', function ($http) {
         var baseUrl = "coupon/admin";
 
         this.getAll = function () {
             return $http.get(baseUrl + "/getAllCustomers");
-        }
-
+        };
         this.create = function (customer) {
             return $http({
                 method: 'POST',
@@ -13,8 +13,7 @@ angular.module("Coupon")
                 headers: {'Content-Type': 'application/json'},
                 data: customer
             })
-        }
-
+        };
         this.update = function (id, customer) {
             var customerToUpdate = angular.copy(customer);
             customerToUpdate.id = id;
@@ -25,8 +24,7 @@ angular.module("Coupon")
                 headers: {'Content-Type': 'application/json'},
                 data: customerToUpdate
             })
-        }
-
+        };
         this.remove = function (id) {
             return $http({
                 method: 'Delete',
@@ -34,8 +32,7 @@ angular.module("Coupon")
                 headers: {'Content-Type': 'text/plain'},
                 data: id
             })
-        }
-
+        };
         this.getCoupons = function (id) {
             return $http({
                 method: 'POST',
@@ -43,15 +40,5 @@ angular.module("Coupon")
                 headers: {'Content-Type': 'text/plain'},
                 data: id
             })
-        }
-
-        // not in use
-        this.getByid = function (id) {
-            return $http({
-                method: 'POST',
-                url: baseUrl + "/getCustomer",
-                headers: {'Content-Type': 'application/json'},
-                data: id
-            })
-        }
+        };
     });

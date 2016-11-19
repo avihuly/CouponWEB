@@ -54,8 +54,8 @@
                     </button>
                 </form>
                 <div class="buttons" ng-show="!companyform.$visible">
-                    <button class="btn btn-info"  ng-click="getCompanyCoupons(company.id, $index)">coupons</button>
-                    <button class="btn btn-primary" ng-click="companyform.$show()">edit</button>
+                    <button class="btn btn-info" ng-click="getCompanyCoupons(company.id, $index)">coupons</button>
+                    <button id="{{'edit' + $index}}" class="btn btn-primary" ng-click="companyform.$show()">edit</button>
                     <button class="btn btn-danger" ng-click="removeCompany($index)">del</button>
                 </div>
             </td>

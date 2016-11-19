@@ -1,5 +1,5 @@
 /**
- * Created by Avi on 03/09/2016.
+ * Created by Avi & Orit on 03/09/2016.
  */
 var app = angular.module("Coupon", ['ngRoute', 'ui.bootstrap', 'xeditable']);
 
@@ -21,30 +21,3 @@ app.run(function (editableOptions) {
     console.log("run web app");
     editableOptions.theme = 'bs3';
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// 'Access-Control-Allow-Origin': '*',
-// 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-// 'Access-Control-Allow-Headers': 'Content-Type, X-Requested-With',
-// 'X-Random-Shit':'123123123'

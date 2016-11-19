@@ -1,3 +1,5 @@
+// Used to created a new filter
+// the filter is used for sending filter coupon data to server
 angular.module("Coupon")
     .factory('couponFilterFactory', ['couponTypesFactory', function (couponTypesFactory) {
         return function () {

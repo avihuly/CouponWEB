@@ -7,7 +7,7 @@ angular.module("Coupon")
         };
         this.create = function (coupon) {
             coupon.startDate = couponUtil.dateToStringFormat(coupon.startDate);
-            coupon.endDate =coupon.startDate = couponUtil.dateToStringFormat(coupon.endDate);
+            coupon.endDate = coupon.endDate = couponUtil.dateToStringFormat(coupon.endDate);
 
             return $http({
                 method: 'POST',

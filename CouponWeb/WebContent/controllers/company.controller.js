@@ -19,9 +19,16 @@ angular.module("Coupon")
         // List of coupon types
         $scope.types = couponTypesFactory;
 
-        //////////////////////
-        // Validation method//
-        //////////////////////
+        // Clear Search Text
+        $scope.ClearSearchText = function () {
+            $scope.searchText = '';
+        };
+
+        // Validation method //
+        // Validation method are called before sending data to the server
+        // and stop the request if detecting illegal values
+
+        // coupon title validation
         $scope.onberofesaveCouponTitle = function (data) {
             var coupTitle = [];
             for (var i = 0; i < $scope.coupons.length; i++) {
@@ -29,12 +36,15 @@ angular.module("Coupon")
             }
             return couponUtil.nameValidation(data, coupTitle);
         };
+        // end date validation
         $scope.onberofesaveEndDate = function (data) {
             return couponUtil.dateValidation(data);
         };
+        // price validation
         $scope.onberofesavePrice = function (data) {
             return couponUtil.PriceValidation(data);
         }
+
 
         ////////////
         // COUPON //
@@ -51,6 +61,7 @@ angular.module("Coupon")
                         couponUtil.handleBadResponse('ERROR:', response);
                     });
         };
+        $scope.getAllCoupons(); // loading coupons on page startup
         // Remove coupon
         $scope.removeCoupon = function (index) {
             companyCouponProxy.remove($scope.coupons[index].id)
@@ -204,12 +215,9 @@ angular.module("Coupon")
             $scope.couponTemplate.startDate = today;
             $scope.couponTemplate.endDate = todayPlus30;
         };
-        // TODO: IMAGE UPLOAD
         $scope.imagePathChanged = function () {
             alert(document.getElementById("image"));
         };
-
-
         function getBase64(file, successCb, errorCb) {
             var reader = new FileReader();
             reader.readAsDataURL(file);
@@ -219,5 +227,5 @@ angular.module("Coupon")
             reader.onerror = function (error) {
                 errorCb(error);
             };
-        }
+        };
     });

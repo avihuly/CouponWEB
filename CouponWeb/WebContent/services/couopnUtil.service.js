@@ -87,6 +87,3 @@ angular.module("Coupon")
             console.log(data);
         };
     });
-
-
-

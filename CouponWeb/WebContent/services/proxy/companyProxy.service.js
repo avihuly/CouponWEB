@@ -1,12 +1,10 @@
+// company proxy handels all server calls for company objects manipulation
 angular.module("Coupon")
     .service('companyProxy', function ($http) {
         var baseUrl = "coupon/admin";
-
-
         this.getAll = function () {
             return $http.get(baseUrl + "/getAllCompanies");
-        }
-
+        };
         this.create = function (company) {
             return $http({
                 method: 'POST',
@@ -14,8 +12,7 @@ angular.module("Coupon")
                 headers: {'Content-Type': 'application/json'},
                 data: company
             })
-        }
-
+        };
         this.update = function (id, company) {
             var companyToUpdate = angular.copy(company);
             companyToUpdate.id = id;
@@ -26,8 +23,7 @@ angular.module("Coupon")
                 headers: {'Content-Type': 'application/json'},
                 data: companyToUpdate
             });
-        }
-
+        };
         this.remove = function (id) {
             return $http({
                 method: 'Delete',
@@ -35,8 +31,7 @@ angular.module("Coupon")
                 headers: {'Content-Type': 'text/plain'},
                 data: id
             });
-        }
-
+        };
         this.getCoupons = function (id) {
             return $http({
                 method: 'POST',
@@ -44,15 +39,5 @@ angular.module("Coupon")
                 headers: {'Content-Type': 'text/plain'},
                 data: id
             });
-        }
-        
-        // not in use
-        this.getByid = function (id) {
-            return $http({
-                method: 'POST',
-                url: baseUrl + "/getCompany",
-                headers: {'Content-Type': 'application/json'},
-                data: id
-            })
-        }
+        };
     });

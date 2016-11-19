@@ -1,3 +1,4 @@
+// customerCouponProxy handels all server calls for customer coupons manipulation
 angular.module("Coupon")
     .service('customerCouponProxy', function ($http) {
         var baseUrl = "coupon/customer";
@@ -5,11 +6,9 @@ angular.module("Coupon")
         this.browse = function () {
             return $http.get(baseUrl + "/browseCoupon");
         };
-
         this.purchased = function () {
             return $http.get(baseUrl + "/purchasedCoupons");
         };
-       
         this.buy = function (id) {
             return $http({
                 method: 'POST',
@@ -18,7 +17,6 @@ angular.module("Coupon")
                 data: id
             });
         };
-
         this.purchasedByType = function (type) {
             return $http({
                 method: 'POST',
@@ -27,7 +25,6 @@ angular.module("Coupon")
                 data: type
             });
         };
-
         this.purchasedByPrice = function (price) {
             return $http({
                 method: 'POST',

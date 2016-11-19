@@ -20,3 +20,8 @@ table, td, tr {
     position: relative;
     overflow: hidden;
 }
+
+#clientRadio{
+    margin-left: 38%;
+    margin-right: 38%;
+}

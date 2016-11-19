@@ -1,3 +1,4 @@
+// companyCouponProxy handels all server calls for company coupons manipulation
 angular.module("Coupon")
     .service('companyCouponProxy', function ($http, couponFactory, couponUtil) {
         var baseUrl = "coupon/company";

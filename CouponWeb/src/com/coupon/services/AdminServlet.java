@@ -25,9 +25,7 @@ public class AdminServlet {
 	private static final String Facade_Attr = "FACADE";
 
 	@Context private HttpServletRequest request;
-	
-	
-	
+		
 	//////////////////// *************** /////////////////
 	//////////////////// COMPANY METHODS /////////////////
 	//////////////////// *************** /////////////////

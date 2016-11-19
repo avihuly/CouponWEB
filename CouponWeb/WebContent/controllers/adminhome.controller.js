@@ -1,7 +1,7 @@
 angular.module("Coupon")
     .controller("adminhomeController", function
-        ($scope, $http, $rootScope, $location, couponUtil,
-         loginProxy, companyProxy, customerProxy,
+        ($scope, $http, $rootScope, $location, $document,
+         couponUtil, loginProxy, companyProxy, customerProxy,
          companyFactory, customerFactory) {
 
         // Companies model array
@@ -17,26 +17,30 @@ angular.module("Coupon")
         // sidebar navigation click model
         $scope.sideBarRadioClickModel = "views/adminCompany.view.html";
 
-        //////////////////////
-        // Validation method//
-        //////////////////////
+        // Clear Search Text
+        $scope.ClearSearchText = function () {
+            $scope.searchText = '';
+        };
+
+        // Validation method //
+        // Validation method are called before sending data to the server
+        // and stop the request if detecting illegal values
+
+        // password Validation
         $scope.onberofesavePASSWORD = function (data) {
             return couponUtil.passwordValidation(data);
         };
+        // customer name Validation
         $scope.onberofesaveCompanyName = function (name) {
             return couponUtil.nameValidation(name);
         };
+        // company name Validation
         $scope.onberofesaveCustomerName = function (data) {
             var names = [];
             for (var i = 0; i < $scope.customers.length; i++) {
                 names.push($scope.customers[i].name);
             }
             return couponUtil.nameValidation(data, names);
-        };
-
-        // Clear Search Text
-        $scope.ClearSearchText = function () {
-            $scope.searchText = '';
         };
 
 
@@ -54,7 +58,7 @@ angular.module("Coupon")
                         couponUtil.handleBadResponse('ERROR:', response);
                     });
         };
-
+        $scope.getAllCompanies (); // loading companies on page startup
         // Remove company
         $scope.removeCompany = function (index) {
             alert("B4 if null");
@@ -75,7 +79,6 @@ angular.module("Coupon")
                 $scope.companies.splice(index, 1);
             }
         };
-
         // Add/Update company (presest)
         $scope.addUpdateCompany = function (data, index) {
             if ($scope.companies[index].id == null) {
@@ -89,6 +92,7 @@ angular.module("Coupon")
                         },
                         function errorCallback(response) {
                             couponUtil.handleBadResponse('ERROR:', response);
+                            $scope.companies.splice(index, 1);
                         });
             } else {
                 // Update company in DB
@@ -103,7 +107,6 @@ angular.module("Coupon")
                     });
             }
         };
-
         // Get all company coupons
         $scope.getCompanyCoupons = function (id, index) {
             companyProxy.getCoupons(id)
@@ -117,7 +120,6 @@ angular.module("Coupon")
                         couponUtil.handleBadResponse('ERROR:', response);
                     });
         };
-
         // Add ROW for new company
         $scope.addRowForCompany = function () {
             $scope.companies.push(companyFactory());
@@ -138,7 +140,6 @@ angular.module("Coupon")
                         couponUtil.handleBadResponse('ERROR:', response);
                     });
         };
-
         // Remove customer
         $scope.removeCustomer = function (index) {
             if ($scope.customers[index].id != null) {
@@ -157,7 +158,6 @@ angular.module("Coupon")
                 $scope.customers.splice(index, 1);
             }
         };
-
         // Add/Update customer (presest)
         $scope.addUpdateCustomer = function (data, index) {
             if ($scope.customers[index].id == null) {
@@ -170,6 +170,7 @@ angular.module("Coupon")
                     },
                     function errorCallback(response) {
                         couponUtil.handleBadResponse('ERROR:', response);
+                        $scope.companies.splice(index, 1);
                     });
             } else {
                 // Update customer in DB
@@ -184,7 +185,6 @@ angular.module("Coupon")
                     });
             }
         };
-
         // Get all customer coupons
         $scope.getCustomerCoupons = function (id, index) {
             customerProxy.getCoupons(id)
@@ -198,9 +198,9 @@ angular.module("Coupon")
                         couponUtil.handleBadResponse('ERROR:', response);
                     });
         };
-
         // Add ROW for new company
         $scope.addRowForCustomer = function () {
+            // new customer object pushed to local model
             $scope.customers.push(customerFactory());
         };
     });
