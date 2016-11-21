@@ -44,7 +44,7 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/org.eclipse.persistence.core-2.6.0.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/org.eclipse.persistence.moxy-2.6.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/CouponSystem"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/couponSystemCore.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

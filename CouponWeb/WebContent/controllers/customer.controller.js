@@ -55,6 +55,7 @@ angular.module("Coupon")
                     function successCallback(response) {
                         $scope.purchasedCoupons.push(response.data);
                         couponUtil.handleBadResponse('Purchased coupon:', response);
+                        alert("Coupon Purchased");
                     },
                     function errorCallback(response) {
                         couponUtil.handleBadResponse('ERROR:', response);
